@@ -1,0 +1,34 @@
+<br/>
+<br/>
+
+
+<div id="rmlb_board">
+  <table border="2">
+    <tr>
+      <th>user_id</th><th>名前</th><th>現在地</th><th>始業予定</th><th>終業予定</th><th>メモ</th><th>最終ログイン時刻</th>
+    <% @assignable_users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_location} %></td>
+        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_start} %></td>
+        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_end} %></td>
+        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_memo} %></td>
+        <td><%= user.last_login_on %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<!-- library 読み込み  -->
+
+
+<!-- 自作assets 読み込み  -->
+
+
+<div id="footer_message">
+    <%= textilizable @rmlb_setting.footer_message %>
+</div>
+
+
+

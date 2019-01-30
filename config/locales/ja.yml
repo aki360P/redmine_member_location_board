@@ -1,0 +1,10 @@
+# 日本語 for Rails i18n
+ja:
+  label_rmlb_location: "行先板"
+  
+  label_rmlb_setting_custom_field_id_location: "現在地"
+  label_rmlb_setting_custom_field_id_start: "始業予定"
+  label_rmlb_setting_custom_field_id_end: "終業予定"
+  label_rmlb_setting_custom_field_id_memo: "メモ"
+  label_rmlb_footer_message: "注意書き"
+  
