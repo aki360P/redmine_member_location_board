@@ -1,7 +1,5 @@
 class CreateTable < ActiveRecord::Migration
   def self.up
-    drop_table :rmlb_locations
-  
     create_table :rmlb_locations do |t|
       t.belongs_to :user
       t.column :user_id, :integer
