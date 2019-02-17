@@ -1,53 +1,5 @@
-<div id="rmlb_settings">
 
-
-<% @rmlb_setting = RmlbSetting.find_or_create(@project.id) %>
-<%= labelled_form_for :settings, @rmlb_setting,
-                             :url => {:controller => 'rmlb_settings',
-                             :action => 'edit', :project_id => @project, :tab => 'rmlb_location',
-                             :setting_id => @rmlb_setting.id}, 
-                             :html => {:id => 'rmlb_location' } do |f| %>
-
-
-
-  <div class="box tabular">
-    
-    <%- if Rails::VERSION::MAJOR >= 4 %>
-      <%- custom_fields_users = CustomField.where(type: 'UserCustomField') %>
-    <%- else %>
-      <%- custom_fields_users = CustomField.find(:all, :conditions => "type = 'UserCustomField'") %>
-    <%- end %>
-      
-      <p>
-        <%= label_tag('settings[custom_field_id_location]', l(:label_rmlb_setting_custom_field_id_location)) %>
-        <%= select_tag('settings[custom_field_id_location]', options_for_select(custom_fields_users.collect{|c| [c.name, c.id]}, @rmlb_setting['custom_field_id_location'])) %>
-      </p>
-      <p>
-        <%= label_tag('settings[custom_field_id_start]', l(:label_rmlb_setting_custom_field_id_start)) %>
-        <%= select_tag('settings[custom_field_id_start]', options_for_select(custom_fields_users.collect{|c| [c.name, c.id]}, @rmlb_setting['custom_field_id_start'])) %>
-      </p>
-      <p>
-        <%= label_tag('settings[custom_field_id_end]', l(:label_rmlb_setting_custom_field_id_end)) %>
-        <%= select_tag('settings[custom_field_id_end]', options_for_select(custom_fields_users.collect{|c| [c.name, c.id]}, @rmlb_setting['custom_field_id_end'])) %>
-      </p>
-      <p>
-        <%= label_tag('settings[custom_field_id_memo]', l(:label_rmlb_setting_custom_field_id_memo)) %>
-        <%= select_tag('settings[custom_field_id_memo]', options_for_select(custom_fields_users.collect{|c| [c.name, c.id]}, @rmlb_setting['custom_field_id_memo'])) %>
-      </p>
-      
-      <p>
-      <%= label_tag('settings[footer_message]', l(:label_rmlb_footer_message)) %>
-      <%= text_area_tag('settings[footer_message]', @rmlb_setting['footer_message']) %>
-      <br/>
-    </p>
-    
-    
-  </div>
-
-    <%= submit_tag l(:button_save) %>
-    <% end %>
-
-
-</div>
-
-
+<p>
+  <%= content_tag(:label, :label_rmlb_location)%>
+  <%= text_area_tag 'settings[rmlb_location]', @settings['rmlb_location'], :rows => 14 ,:required => true %><br/>
+</p>

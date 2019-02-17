@@ -1,33 +1,53 @@
 <br/>
-<br/>
-
-
-<div id="rmlb_board">
-  <table border="2">
-    <tr>
-      <th>user_id</th><th>名前</th><th>現在地</th><th>始業予定</th><th>終業予定</th><th>メモ</th><th>最終ログイン時刻</th>
-    <% @assignable_users.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
-        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_location} %></td>
-        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_start} %></td>
-        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_end} %></td>
-        <td><%= user.custom_field_values.detect {|c| c.custom_field.id == @rmlb_setting.custom_field_id_memo} %></td>
-        <td><%= user.last_login_on %></td>
-      </tr>
-    <% end %>
-  </table>
-</div>
 
 <!-- library 読み込み  -->
-
 
 <!-- 自作assets 読み込み  -->
 
 
+
+<div id="rmlb_board">
+
+  <table id="rmlb_board" border=1px>
+    <tr>
+      <th class="a">ログインID</th>
+      <th class="b">名前</th>
+      <th class="c">現在地</th>
+      <th class="d">始業予定</th>
+      <th class="e">終業予定</th>
+      <th class="f">メモ</th>
+      <th class="g">更新時刻</th>
+      <th class="h">更新</th>
+      
+    <% @project.assignable_users.each do |u| %>
+    <% @rmlb_location = RmlbLocation.find_or_create(u.id) %>
+    <%= labelled_form_for :location, @rmlb_location, :url => {:controller => 'rmlb_locations',
+                             :action => 'update', :project_id => @project, :user_id => u.id } do |f| %>
+      <tr>
+          <td><%= u.login %></td>
+          <td><%= u.name %></td>
+          <td><%= select_tag('location[location]', options_for_select(@rmlb_setting_location, :selected => @rmlb_location.location), :include_blank=>true) %></td>
+          <td><%= text_area_tag('location[start_time]', @rmlb_location.start_time, :size => "10x1") %></td>
+          <td><% if u.id == @user_current.id %>
+                <%= text_area_tag('location[end_time]', @rmlb_location.end_time, :size => "10x1") %>
+              <% elsif User.current.admin? %>
+                <%= text_area_tag('location[end_time]', @rmlb_location.end_time, :size => "10x1") %>
+              <% else %>
+                <%= @rmlb_location.end_time %>
+              <% end %></td>
+          <td><%= text_area_tag('location[memo]', @rmlb_location.memo, :size => "30x1") %></td>
+          <td><%= @rmlb_location.updated_on.in_time_zone('Tokyo')  %></td>
+          <td><%= submit_tag l(:button_save) %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </table>
+</div>
+
+
+
 <div id="footer_message">
-    <%= textilizable @rmlb_setting.footer_message %>
+
 </div>
 
 

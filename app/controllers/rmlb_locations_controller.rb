@@ -13,28 +13,33 @@ class RmlbLocationsController < ApplicationController
   end
 
   def index
-    #Ý’è‚³‚ê‚½ƒe[ƒuƒ‹‚ð“Ç‚Ýž‚Ý
-    @rmlb_setting = RmlbSetting.find_by(project_id: @project.id)
-    @rmlb_location = CustomField.find_by_id(@rmlb_setting.custom_field_id_location).possible_values
-    @rmlb_star_time = CustomField.find_by_id(@rmlb_setting.custom_field_id_start).possible_values
-    @rmlb_end_time =  CustomField.find_by_id(@rmlb_setting.custom_field_id_end).possible_values
-    @rmlb_memo = CustomField.find_by_id(@rmlb_setting.custom_field_id_memo)
+    @rmlb_setting_location = Setting.plugin_redmine_member_location_board['rmlb_location'].split(/\r\n/)
     
     @user_is_manager = 0
     if User.current.allowed_to?(:edit_project, @project) 
       @user_is_manager = 1
     end
     
-    @assignable_users = @project.assignable_users
+    @user_current = User.current
     
-    @api_key = User.current.api_key
-    unless User.current.allowed_to?(:view_issues, @project)
-      render_403
+  end
+  
+  def edit
+  end
+  
+  def update
+    unless params[:location].nil?
+      aaa = RmlbLocation.where(['user_id = ?', params[:user_id]]).first
+      
+      puts '------------------------------'
+      puts params[:location].to_a
+      puts '------------------------------'
+      
+      aaa.update_attributes(params[:location])
+      aaa.save
+        flash[:notice] = l(:notice_successsful_update)
+        redirect_to project_rmlb_locations_path(:project => @project.name)
     end
-    
-    @user_can_add = User.current.allowed_to?(:add_issues, @project)
-    @user_can_edit = User.current.allowed_to?(:edit_issues, @project)
-    @user_can_delete = User.current.allowed_to?(:delete_issues, @project)
   end
 
   private
@@ -48,6 +53,5 @@ class RmlbLocationsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  
-  
+    
 end
