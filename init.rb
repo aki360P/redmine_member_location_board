@@ -17,6 +17,6 @@ Redmine::Plugin.register :redmine_member_location_board do
   
   
   # setting
-  settings            :partial => 'rmlb_settings/show'
-  
+  settings  :partial => 'rmlb_settings/show',
+            :default => {'location'=>"ここに行先を入力してください(改行で区切る)"}
 end
