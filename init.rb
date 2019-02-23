@@ -1,9 +1,10 @@
+require 'redmine'
 
 Redmine::Plugin.register :redmine_member_location_board do
   name 'Redmine Member Location Board plugin'
   author 'Akinori Iwasaki'
   description 'Provides a member location board'
-  version '0.1.0'
+  version '0.1.1'
   url 'https://github.com/aki360P/redmine_member_location_board'
   
   project_module :redmine_member_location_board do
@@ -13,10 +14,10 @@ Redmine::Plugin.register :redmine_member_location_board do
   
   
   # add tab - project module
-  menu :project_menu, :rmlb_locations, {:controller => 'rmlb_locations', :action => 'index' }, :caption => :label_rmlb_location, :param => :project_id
+  menu :project_menu, :rmlb_locations, {:controller => 'rmlb_locations', :action => 'index' }, :caption => :label_rmlb, :param => :project_id
   
   
   # setting
   settings  :partial => 'rmlb_settings/show',
-            :default => {'location'=>"ここに行先を入力してください(改行で区切る)"}
+            :default => {'location'=> "Set location as a list here. Comma separated is not recognized as a list" }
 end

@@ -10,14 +10,14 @@
 
   <table id="rmlb_board" border=1px>
     <tr>
-      <th class="a">ログインID</th>
-      <th class="b">名前</th>
-      <th class="c">現在地</th>
-      <th class="d">始業予定</th>
-      <th class="e">終業予定</th>
-      <th class="f">メモ</th>
-      <th class="g">更新時刻</th>
-      <th class="h">更新</th>
+      <th class="a"><%= content_tag(:label, l(:label_rmlb_loginid))%></th>
+      <th class="b"><%= content_tag(:label, l(:label_rmlb_name))%></th>
+      <th class="c"><%= content_tag(:label, l(:label_rmlb_location))%></th>
+      <th class="d"><%= content_tag(:label, l(:label_rmlb_start))%></th>
+      <th class="e"><%= content_tag(:label, l(:label_rmlb_end))%></th>
+      <th class="f"><%= content_tag(:label, l(:label_rmlb_memo))%></th>
+      <th class="g"><%= content_tag(:label, l(:label_rmlb_update))%></th>
+      <th class="h"><%= content_tag(:label, l(:label_rmlb_save))%></th>
       
     <% @project.assignable_users.each do |u| %>
     <% @rmlb_location = RmlbLocation.find_or_create(u.id) %>

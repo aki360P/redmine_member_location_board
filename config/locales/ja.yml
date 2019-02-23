@@ -1,6 +1,17 @@
 # 日本語 for Rails i18n
 ja:
-  label_rmlb_location: "行先板"
+  project_module_redmine_member_location_board: "行先板"
+  permission_rmlb_location_view: "行先板の表示"
+  permission_rmlb_location_edit: "行き先の編集"
   
-  notice_successsful_update: "更新しました"
+  label_rmlb: "行先板"
+  label_rmlb_loginid: "ログインID"
+  label_rmlb_name: "名前"
+  label_rmlb_location: "現在地"
+  label_rmlb_start: "始業時刻"
+  label_rmlb_end: "終業時刻"
+  label_rmlb_memo: "メモ"
+  label_rmlb_update: "更新時刻"
+  label_rmlb_save: "保存"
+  
   

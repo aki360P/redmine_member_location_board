@@ -1,6 +1,17 @@
 # English strings go here for Rails i18n
 en:
-  label_rmlb_location: "Member Location Board"
+  project_module_redmine_member_location_board: "Member Location Board"
+  permission_rmlb_location_view: "view location board"
+  permission_rmlb_location_edit: "edit location"
   
-  notice_successsful_update: "update successsfully"
+  label_rmlb: "Location Board"
+  label_rmlb_loginid: "Login ID"
+  label_rmlb_name: "Nmae"
+  label_rmlb_location: "Location"
+  label_rmlb_start: "Start time"
+  label_rmlb_end: "End time"
+  label_rmlb_memo: "Memo"
+  label_rmlb_update: "Last update"
+  label_rmlb_save: "Save"
+  
   
