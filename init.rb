@@ -18,6 +18,6 @@ Redmine::Plugin.register :redmine_member_location_board do
   
   
   # setting
-  settings  :partial => 'rmlb_settings/show',
-            :default => { location: "Set location as a list here. Comma separated is not recognized as a list" }
+  settings  partial: 'rmlb_settings/show',
+            default: { 'rmlb_location' => 'Set location as a list in the admin plugin setting field. Comma separated is not recognized as a list' }
 end
