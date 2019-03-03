@@ -1,4 +1,4 @@
-class CreateTable < ActiveRecord::Migration[4.2]
+class CreateTable < ActiveRecord::Migration
   def self.up
     create_table :rmlb_locations do |t|
       t.belongs_to :user
