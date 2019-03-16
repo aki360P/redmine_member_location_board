@@ -3,6 +3,7 @@
 <!-- library 読み込み  -->
 
 <!-- 自作assets 読み込み  -->
+<%= stylesheet_link_tag 'rmlb_projectindex.css',:plugin => 'redmine_member_location_board' %>
 
 
 
@@ -23,9 +24,19 @@
     <% @rmlb_location = RmlbLocation.find_or_create(u.id) %>
     <%= labelled_form_for :location, @rmlb_location, :url => {:controller => 'rmlb_locations',
                              :action => 'update', :project_id => @project, :user_id => u.id } do |f| %>
+                             
+      <% if @rmlb_location.location.include?("1.") %>
+        <% location_class = "a" %>
+      <% elsif @rmlb_location.location.include?("2.") %>
+        <% location_class = "b" %>
+      <% elsif @rmlb_location.location.include?("3.") %>
+        <% location_class = "c" %>
+      <% else %>
+      <% end %>
+      
       <tr>
           <td><%= u.login %></td>
-          <td><%= u.name %></td>
+          <td class='<%= location_class %>'><%= u.name %></td>
           <td><%= select_tag('location[location]', options_for_select(@rmlb_setting_location, :selected => @rmlb_location.location), :include_blank=>true) %></td>
           <td><%= text_area_tag('location[start_time]', @rmlb_location.start_time, :size => "10x1") %></td>
           <td><% if u.id == @user_current.id %>
