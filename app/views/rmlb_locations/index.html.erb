@@ -36,7 +36,7 @@
                 <%= @rmlb_location.end_time %>
               <% end %></td>
           <td><%= text_area_tag('location[memo]', @rmlb_location.memo, :size => "30x1") %></td>
-          <td><%= @rmlb_location.updated_on.in_time_zone('Tokyo')  %></td>
+          <td><%= @rmlb_location.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
           <td><%= submit_tag l(:button_save) %></td>
       </tr>
     <% end %>
