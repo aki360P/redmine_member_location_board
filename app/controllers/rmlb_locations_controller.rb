@@ -39,7 +39,7 @@ class RmlbLocationsController < ApplicationController
       
       aaa.update_attributes(params[:location])
       aaa.save
-        flash[:notice] = l(:notice_successsful_update)
+        flash[:notice] = l(:notice_successful_update)
         redirect_to project_rmlb_locations_path(:project => @project.name)
     end
   end

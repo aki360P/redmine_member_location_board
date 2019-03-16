@@ -1,6 +1,6 @@
 # 日本語 for Rails i18n
 ja:
-  project_module_redmine_member_location_board: "行先板"
+  project_module_redmine_member_location_board: "行先掲示板"
   permission_rmlb_location_view: "行先板の表示"
   permission_rmlb_location_edit: "行き先の編集"
   
