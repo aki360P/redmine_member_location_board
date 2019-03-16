@@ -22,6 +22,8 @@ class RmlbLocationsController < ApplicationController
     
     @user_current = User.current
     
+    @rmlb_projectusers = @project.assignable_users.sort_by{|u| u.id }
+    
   end
   
   def edit

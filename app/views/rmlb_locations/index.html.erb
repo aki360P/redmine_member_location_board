@@ -19,7 +19,7 @@
       <th class="g"><%= content_tag(:label, l(:label_rmlb_update))%></th>
       <th class="h"><%= content_tag(:label, l(:label_rmlb_save))%></th>
       
-    <% @project.assignable_users.each do |u| %>
+    <% @rmlb_projectusers.each do |u| %>
     <% @rmlb_location = RmlbLocation.find_or_create(u.id) %>
     <%= labelled_form_for :location, @rmlb_location, :url => {:controller => 'rmlb_locations',
                              :action => 'update', :project_id => @project, :user_id => u.id } do |f| %>
