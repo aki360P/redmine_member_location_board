@@ -4,7 +4,7 @@ ja:
   permission_rmlb_location_view: "行先板の表示"
   permission_rmlb_location_edit: "行き先の編集"
   
-  label_rmlb: "行先板"
+  label_rmlb: "行先掲示板"
   label_rmlb_loginid: "ログインID"
   label_rmlb_name: "名前"
   label_rmlb_location: "現在地"
