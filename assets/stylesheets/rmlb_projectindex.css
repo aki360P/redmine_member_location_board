@@ -10,3 +10,6 @@ div#rmlb_board tr.a{
   background-color: #f08080;
 }
 
+div#rmlb_board tr.old{
+  color: #808080;
+}

@@ -32,12 +32,18 @@
       <% else %>
       <% end %>
       
+      <% if (Time.now.utc - @rmlb_location.updated_on) > 3600*24 %>
+        <% passtime_class = " old" %>
+      <% elsif %>
+        <% passtime_class = "" %>
+      <% end %>
+      
     <%= labelled_form_for :location, @rmlb_location, :url => {:controller => 'rmlb_locations',
                              :action => 'update', :project_id => @project, :user_id => u.id } do |f| %>
                              
-      <tr class='<%= location_class %>'>
+      <tr class='<%= location_class %><%= passtime_class %>'>
           <td><%= u.login %></td>
-          <td class='<%= location_class %>'><%= u.name %></td>
+          <td><%= u.name %></td>
           <td><%= select_tag('location[location]', options_for_select(@rmlb_setting_location, :selected => @rmlb_location.location), :include_blank=>true) %></td>
           <td><%= text_area_tag('location[start_time]', @rmlb_location.start_time, :size => "10x1") %></td>
           <td><% if u.id == @user_current.id %>
@@ -55,7 +61,6 @@
     <% end %>
   </table>
 </div>
-
 
 
 <div id="footer_message">
