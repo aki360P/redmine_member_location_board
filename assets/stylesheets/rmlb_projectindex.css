@@ -2,14 +2,11 @@ div#rmlb_board th{
   background-color: #EEEEEE;
 }
 
-div#rmlb_board td.a{
-  color: #EE0000;
-}
-
-div#rmlb_board td.b{
-  color: #EE0000;
-}
-
 div#rmlb_board tr:hover{
   background-color: #FFFFEE;
 }
+
+div#rmlb_board tr.a{
+  background-color: #f08080;
+}
+

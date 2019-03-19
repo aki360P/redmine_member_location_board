@@ -22,9 +22,7 @@
       
     <% @rmlb_projectusers.each do |u| %>
     <% @rmlb_location = RmlbLocation.find_or_create(u.id) %>
-    <%= labelled_form_for :location, @rmlb_location, :url => {:controller => 'rmlb_locations',
-                             :action => 'update', :project_id => @project, :user_id => u.id } do |f| %>
-                             
+    
       <% if @rmlb_location.location.include?("1.") %>
         <% location_class = "a" %>
       <% elsif @rmlb_location.location.include?("2.") %>
@@ -34,7 +32,10 @@
       <% else %>
       <% end %>
       
-      <tr>
+    <%= labelled_form_for :location, @rmlb_location, :url => {:controller => 'rmlb_locations',
+                             :action => 'update', :project_id => @project, :user_id => u.id } do |f| %>
+                             
+      <tr class='<%= location_class %>'>
           <td><%= u.login %></td>
           <td class='<%= location_class %>'><%= u.name %></td>
           <td><%= select_tag('location[location]', options_for_select(@rmlb_setting_location, :selected => @rmlb_location.location), :include_blank=>true) %></td>
