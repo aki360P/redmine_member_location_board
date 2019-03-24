@@ -4,10 +4,12 @@
 
 <!-- 自作assets 読み込み  -->
 <%= stylesheet_link_tag 'rmlb_projectindex.css',:plugin => 'redmine_member_location_board' %>
-
+<%= javascript_include_tag 'rmlb_projectindex.js',:plugin => 'redmine_member_location_board' %>
 
 
 <div id="rmlb_board">
+  <input type="checkbox" id="rmlb_check1" name="auto_reload"><label for="check1">自動再読み込み</label><br>
+  <br>
 
   <table id="rmlb_board" border=1px>
     <tr>
@@ -67,5 +69,8 @@
 
 </div>
 
+<% content_for :sidebar do %>
+  <%= render :partial => 'sidebar' %>
+<% end %>
 
 
