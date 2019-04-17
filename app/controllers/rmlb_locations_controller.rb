@@ -21,22 +21,31 @@ class RmlbLocationsController < ApplicationController
     end
     
     @user_current = User.current
-    
+
     @rmlb_projectusers = @project.assignable_users.sort_by{|u| u.login }
+    
+    if params[:id].nil?
+      @rmlb_location_edit = RmlbLocation.find_or_create(User.current.id)
+    else
+      @rmlb_location_edit = RmlbLocation.find(params[:id])
+    end
   end
   
-  def edit
+  def show
+    index()
+    render "index"
   end
+
   
   def update
-    unless params[:location].nil?
-      aaa = RmlbLocation.where(['user_id = ?', params[:user_id]]).first
+    unless params[:rmlb_location].nil?
+      aaa = RmlbLocation.find(params[:id])
       
       puts '------------------------------'
-      puts params[:location].to_a
+      puts params[:rmlb_location].to_a
       puts '------------------------------'
       
-      aaa.update_attributes(params[:location])
+      aaa.update_attributes(params[:rmlb_location])
       aaa.save
         flash[:notice] = l(:notice_successful_update)
         redirect_to project_rmlb_locations_path(:project => @project.name)

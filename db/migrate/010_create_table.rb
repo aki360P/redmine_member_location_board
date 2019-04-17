@@ -1,6 +1,6 @@
 class CreateTable < ActiveRecord::Migration
-  def self.up
-    create_table :rmlb_locations do |t|
+  def self.up    
+    create_table :rmlb_locations, id: false, primary_key: :user_id  do |t|
       t.belongs_to :user
       t.column :user_id, :integer
       t.column :location, :string, :limit => 10
@@ -9,6 +9,8 @@ class CreateTable < ActiveRecord::Migration
       t.column :memo, :string, :limit => 30
       t.column :updated_on, :datetime
     end
+    
+    add_index :rmlb_locations, :user_id, unique: true
   end
 
   def self.down

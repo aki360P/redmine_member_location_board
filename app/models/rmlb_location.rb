@@ -2,8 +2,8 @@ class RmlbLocation < ActiveRecord::Base
   include Redmine::SafeAttributes
   unloadable
   belongs_to :user
-  #belongs_to :aaa, class_name: 'User', :foreign_key => 'user_id', :primary_key => 'id'
-
+  self.primary_key = :user_id
+  
   validates_uniqueness_of :user_id
   validates :user_id, presence: true
  
@@ -14,7 +14,8 @@ class RmlbLocation < ActiveRecord::Base
   attr_accessible :memo
 
   def self.find_or_create(user_id)
-    rmlb_location = RmlbLocation.where(['user_id = ?', user_id]).first
+    # primekey_change   rmlb_location = RmlbLocation.where(['user_id = ?', user_id]).first
+    rmlb_location = RmlbLocation.find(user_id)
     
     
     unless rmlb_location.present?
