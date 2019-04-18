@@ -1,0 +1,42 @@
+.toggle-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.toggle-buttons [type=radio],
+.toggle-buttons [type=checkbox] {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.toggle-buttons label {
+  display: flex;
+  position: relative;
+}
+
+/* appearance: none; for IE11 */
+_:-ms-lang(x)::-ms-backdrop, .toggle-buttons [type=radio],
+_:-ms-lang(x)::-ms-backdrop, .toggle-buttons [type=checkbox] {
+  visibility: hidden;
+}
+
+.toggle-buttons :checked + .button {
+  background-color: #345;
+}
+
+
+.button {
+  padding: .2em .2em;
+  margin: 0em 0em;
+  border-radius: 4px;
+  text-align: center;
+  color: #eff;
+  background-color: #678;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #567;
+}
+

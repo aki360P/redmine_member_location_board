@@ -19,54 +19,53 @@
                 <% end %></p>
     <p><%= content_tag(:label, l(:label_rmlb_memo))%> : &nbsp;   <%= f.text_field(:memo, value: @rmlb_location_edit.memo, :size => "20x1", :maxlength => 30) %></p>
     
-    <p><u><%= content_tag(:label, l(:label_rmlb_location))%></u><br>
-      
-      <%if @rmlb_group_name_1.present? %><%= @rmlb_group_name_1 %> : 
-        <% @rmlb_group_list_1.each do |x| %>
+    <p><u><%= content_tag(:label, l(:label_rmlb_location)) %></u>  <label><%= f.radio_button :location, '' %>unknown</label><br>  </p>
+    
+      <%if @rmlb_group_name_1.present? %><%= @rmlb_group_name_1 %><%if @rmlb_group_color_1.present? %>(<%= @rmlb_group_color_1 %>)<% end %> : 
+        <div class="toggle-buttons"><% @rmlb_group_list_1.each do |x| %>
           <% str = @rmlb_group_color_1 + ':' + x %>
-          <label><%= f.radio_button :location, str %><%= x %></label>
-        <% end %>
-      <br><% end %>
-      <%if @rmlb_group_name_2.present? %><%= @rmlb_group_name_2 %> : 
-        <% @rmlb_group_list_2.each do |x| %>
+          <label><%= f.radio_button :location, str %><span class="button"><%= x %></span></label>
+        <% end %></div>
+      <% end %>
+      <%if @rmlb_group_name_2.present? %><%= @rmlb_group_name_2 %><%if @rmlb_group_color_2.present? %>(<%= @rmlb_group_color_2 %>)<% end %> : 
+        <div class="toggle-buttons"><% @rmlb_group_list_2.each do |x| %>
           <% str = @rmlb_group_color_2 + ':' + x %>
-          <label><%= f.radio_button :location, str %><%= x %></label>
-        <% end %>
-      <br><% end %>
-      <%if @rmlb_group_name_3.present? %><%= @rmlb_group_name_3 %> : 
-        <% @rmlb_group_list_3.each do |x| %>
+          <label><%= f.radio_button :location, str %><span class="button"><%= x %></span></label>
+        <% end %></div>
+      <% end %>
+      <%if @rmlb_group_name_3.present? %><%= @rmlb_group_name_3 %><%if @rmlb_group_color_3.present? %>(<%= @rmlb_group_color_3 %>)<% end %> : 
+        <div class="toggle-buttons"><% @rmlb_group_list_3.each do |x| %>
           <% str = @rmlb_group_color_3 + ':' + x %>
-          <label><%= f.radio_button :location, str %><%= x %></label>
-        <% end %>
-      <br><% end %>
-      <%if @rmlb_group_name_4.present? %><%= @rmlb_group_name_4 %> : 
-        <% @rmlb_group_list_4.each do |x| %>
+          <label><%= f.radio_button :location, str %><span class="button"><%= x %></span></label>
+        <% end %></div>
+      <% end %>
+      <%if @rmlb_group_name_4.present? %><%= @rmlb_group_name_4 %><%if @rmlb_group_color_4.present? %>(<%= @rmlb_group_color_4 %>)<% end %> : 
+        <div class="toggle-buttons"><% @rmlb_group_list_4.each do |x| %>
           <% str = @rmlb_group_color_4 + ':' + x %>
-          <label><%= f.radio_button :location, str %><%= x %></label>
-        <% end %>
-      <br><% end %>
-      <%if @rmlb_group_name_5.present? %><%= @rmlb_group_name_5 %> : 
-        <% @rmlb_group_list_5.each do |x| %>
+          <label><%= f.radio_button :location, str %><span class="button"><%= x %></span></label>
+        <% end %></div>
+      <% end %>
+      <%if @rmlb_group_name_5.present? %><%= @rmlb_group_name_5 %><%if @rmlb_group_color_5.present? %>(<%= @rmlb_group_color_5 %>)<% end %> : 
+        <div class="toggle-buttons"><% @rmlb_group_list_5.each do |x| %>
           <% str = @rmlb_group_color_5 + ':' + x %>
-          <label><%= f.radio_button :location, str %><%= x %></label>
-        <% end %>
-      <br><% end %>
-      <%if @rmlb_group_name_6.present? %><%= @rmlb_group_name_6 %> : 
-        <% @rmlb_group_list_6.each do |x| %>
+          <label><%= f.radio_button :location, str %><span class="button"><%= x %></span></label>
+        <% end %></div>
+      <% end %>
+      <%if @rmlb_group_name_6.present? %><%= @rmlb_group_name_6 %><%if @rmlb_group_color_6.present? %>(<%= @rmlb_group_color_6 %>)<% end %> : 
+        <div class="toggle-buttons"><% @rmlb_group_list_6.each do |x| %>
           <% str = @rmlb_group_color_6 + ':' + x %>
-          <label><%= f.radio_button :location, str %><%= x %></label>
-        <% end %>
-      <br><% end %>
-      <%if @rmlb_group_name_7.present? %><%= @rmlb_group_name_7 %> : 
-        <% @rmlb_group_list_7.each do |x| %>
+          <label><%= f.radio_button :location, str %><span class="button"><%= x %></span></label>
+        <% end %></div>
+      <% end %>
+      <%if @rmlb_group_name_7.present? %><%= @rmlb_group_name_7 %><%if @rmlb_group_color_7.present? %>(<%= @rmlb_group_color_7 %>)<% end %> : 
+        <div class="toggle-buttons"><% @rmlb_group_list_7.each do |x| %>
           <% str = @rmlb_group_color_7 + ':' + x %>
-          <label><%= f.radio_button :location, str %><%= x %></label>
-        <% end %>
-      <br><% end %>
-
+          <label><%= f.radio_button :location, str %><span class="button"><%= x %></span></label>
+        <% end %></div>
+      <% end %>
       <br>
-      <label><%= f.radio_button :location, '' %>unknown</label>
-    </p>
+      
+    
     
   <%= f.submit l(:button_save) %>
   <% end %>
