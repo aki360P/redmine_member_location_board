@@ -13,6 +13,8 @@ class RmlbLocationsController < ApplicationController
   end
 
   def index
+    @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
+    
     @rmlb_group_name_1 = Setting.plugin_redmine_member_location_board['rmlb_group_name_1']
     @rmlb_group_color_1 = Setting.plugin_redmine_member_location_board['rmlb_group_color_1']
     @rmlb_group_list_1 = Setting.plugin_redmine_member_location_board['rmlb_group_list_1'].split(/\r\n/)

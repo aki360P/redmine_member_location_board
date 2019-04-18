@@ -5,7 +5,7 @@
 
   <%= form_for @rmlb_location_edit, :url => {:controller => 'rmlb_locations', :action => 'update', :project_id => @project, :id => @rmlb_location_edit.user_id } do |f| %>
   
-    <p>user_id : &nbsp;&nbsp;    <%= @rmlb_location_edit.user_id %></p>
+    <% if @rmlb_display_id == 'true' %><p>user_id : &nbsp;&nbsp;    <%= @rmlb_location_edit.user_id %></p><% end %>
     <p><%= content_tag(:label, l(:label_rmlb_loginid))%> : &nbsp;   <%= @rmlb_location_edit.user.login %></p>
     <p><%= content_tag(:label, l(:label_rmlb_name))%> : &nbsp;   <%= @rmlb_location_edit.user.name %></p>
     <p><%= content_tag(:label, l(:label_rmlb_start))%> : &nbsp; <%= f.text_field(:start_time, value: @rmlb_location_edit.start_time, :maxlength => 10) %></p>
@@ -17,9 +17,10 @@
                 <% else %>
                   <%= @rmlb_location_edit.end_time %>
                 <% end %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_memo))%> : &nbsp;   <%= f.text_field(:memo, value: @rmlb_location_edit.memo, :size => "30x1", :maxlength => 30) %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_memo))%> : &nbsp;   <%= f.text_field(:memo, value: @rmlb_location_edit.memo, :size => "20x1", :maxlength => 30) %></p>
     
-    <p>
+    <p><u><%= content_tag(:label, l(:label_rmlb_location))%></u><br>
+      
       <%if @rmlb_group_name_1.present? %><%= @rmlb_group_name_1 %> : 
         <% @rmlb_group_list_1.each do |x| %>
           <% str = @rmlb_group_color_1 + ':' + x %>

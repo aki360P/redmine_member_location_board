@@ -17,7 +17,7 @@
 
   <table id="rmlb_board" border=1px>
     <tr>
-      <th class="a"><%= content_tag(:label, l(:label_rmlb_loginid))%></th>
+      <% if @rmlb_display_id == 'true' %><th class="a"><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>
       <th class="b"><%= content_tag(:label, l(:label_rmlb_name))%></th>
       <th class="c"><%= content_tag(:label, l(:label_rmlb_location))%></th>
       <th class="d"><%= content_tag(:label, l(:label_rmlb_start))%></th>
@@ -38,7 +38,7 @@
       <% end %>
       
       <tr class='<%= passtime_class %>' style='background-color: <%= @rmlb_location.color %> '>
-          <td><%= u.login %></td>
+          <% if @rmlb_display_id == 'true' %><td><%= u.login %></td><% end %>
           <td><%= link_to u.name, project_rmlb_location_path(@project, @rmlb_location) %></td>
           <td><%= @rmlb_location.location %></td>
           <td><%= @rmlb_location.start_time %></td>
