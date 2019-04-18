@@ -1,0 +1,10 @@
+
+/*------------ plugin settings -----------------*/
+.tabular.settings > .settings_for_plugin > p {
+    padding-left: 200px;
+}
+
+.tabular.settings > .settings_for_plugin > p > label {
+    margin-left: -200px;
+    width: 180px;
+}

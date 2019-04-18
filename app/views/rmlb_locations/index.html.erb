@@ -30,30 +30,22 @@
     <% @rmlb_projectusers.each do |u| %>
     <% @rmlb_location = RmlbLocation.find_or_create(u.id) %>
     
-      <% if @rmlb_location.location.include?("1.") %>
-        <% location_class = "a" %>
-      <% elsif @rmlb_location.location.include?("2.") %>
-        <% location_class = "b" %>
-      <% elsif @rmlb_location.location.include?("3.") %>
-        <% location_class = "c" %>
-      <% else %>
-      <% end %>
       
       <% if (Time.now.utc - @rmlb_location.updated_on) > 3600*24 %>
-        <% passtime_class = " old" %>
+        <% passtime_class = "old" %>
       <% elsif %>
         <% passtime_class = "" %>
       <% end %>
       
-      <tr class='<%= location_class %><%= passtime_class %>'>
+      <tr class='<%= passtime_class %>' style='background-color: <%= @rmlb_location.color %> '>
           <td><%= u.login %></td>
-          <td><%= u.name %></td>
+          <td><%= link_to u.name, project_rmlb_location_path(@project, @rmlb_location) %></td>
           <td><%= @rmlb_location.location %></td>
           <td><%= @rmlb_location.start_time %></td>
           <td><%= @rmlb_location.end_time %></td>
           <td><%= @rmlb_location.memo %></td>
-          <td><%= @rmlb_location.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
-          <td><%= link_to '編集', project_rmlb_location_path(@project, @rmlb_location) %></td>
+          <td><%= @rmlb_location.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></td>
+          <td></td>
       </tr>
     <% end %>
   </table>

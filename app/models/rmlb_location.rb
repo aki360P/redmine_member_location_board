@@ -10,13 +10,12 @@ class RmlbLocation < ActiveRecord::Base
   #validates :at, :uniqueness => {:scope => :user_id}
  
   attr_accessible :location
+  attr_accessible :color
   attr_accessible :start_time, :end_time
   attr_accessible :memo
 
   def self.find_or_create(user_id)
-    # primekey_change   rmlb_location = RmlbLocation.where(['user_id = ?', user_id]).first
-    rmlb_location = RmlbLocation.find(user_id)
-    
+    rmlb_location = RmlbLocation.where(['user_id = ?', user_id]).first
     
     unless rmlb_location.present?
       rmlb_location = RmlbLocation.new()
@@ -24,6 +23,7 @@ class RmlbLocation < ActiveRecord::Base
       
       # Set default
       rmlb_location.location = ''
+      rmlb_location.color = ''
       rmlb_location.start_time = ''
       rmlb_location.end_time = ''
       rmlb_location.memo = ''
