@@ -30,7 +30,7 @@
       
       
     
-    <% @rmlb_location.each do |u| %>
+    <% @rmlb_locations.each do |u| %>
       
       <% if (Time.now.utc - u.updated_on) > 3600*24 %>
         <% passtime_class = "old" %>

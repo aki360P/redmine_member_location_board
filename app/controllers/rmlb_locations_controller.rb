@@ -45,29 +45,27 @@ class RmlbLocationsController < ApplicationController
     
     @user_current = User.current
     
-
-    # @rmlb_projectusers = @project.assignable_users.sort_by{|u| u.login }
-    
-    @rmlb_location = RmlbLocation.find(@project.assignable_users.ids)
+    RmlbLocation.create_all(@project.assignable_users.ids)
+    @rmlb_locations = RmlbLocation.find(@project.assignable_users.ids)
     
     #sort default
-    @rmlb_location.sort_by!{|u| u.user.login }
+    @rmlb_locations.sort_by!{|u| u.user.login }
     
     #sort option
     if @rmlb_priority_sort == 'true'
-      @rmlb_location.sort_by!{|u| u.user_priority }
+      @rmlb_locations.sort_by!{|u| u.user_priority }
     end
     
     if params[:id].nil?
       @rmlb_location_edit = RmlbLocation.find_or_create(User.current.id)
     else
-      @rmlb_location_edit = RmlbLocation.find(params[:id])
+      @rmlb_location_edit = RmlbLocation.find_or_create(params[:id])
     end
     
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @rmlb_location }
-      format.json { render :json => @rmlb_location }
+      format.xml  { render :xml => @rmlb_locations }
+      format.json { render :json => @rmlb_locations }
     end
   end
   
