@@ -63,6 +63,12 @@ class RmlbLocationsController < ApplicationController
     else
       @rmlb_location_edit = RmlbLocation.find(params[:id])
     end
+    
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @rmlb_location }
+      format.json { render :json => @rmlb_location }
+    end
   end
   
   def show
