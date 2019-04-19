@@ -19,6 +19,7 @@
   <table id="rmlb_board" border=1px>
     <tr>
       <% if @rmlb_display_id == 'true' %><th class="a"><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>
+      <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><th class="h"><%= content_tag(:label, l(:label_rmlb_priority))%></th><% end %><% end %>
       <th class="b"><%= content_tag(:label, l(:label_rmlb_name))%></th>
       <th class="c"><%= content_tag(:label, l(:label_rmlb_location))%></th>
       <th class="d"><%= content_tag(:label, l(:label_rmlb_start))%></th>
@@ -27,26 +28,27 @@
       <th class="g"><%= content_tag(:label, l(:label_rmlb_update))%></th>
       <th class="h"><%= content_tag(:label, l(:label_rmlb_edit))%></th>
       
-    
-    <% @rmlb_projectusers.each do |u| %>
-    <% @rmlb_location = RmlbLocation.find_or_create(u.id) %>
-    
       
-      <% if (Time.now.utc - @rmlb_location.updated_on) > 3600*24 %>
+    
+    <% @rmlb_location.each do |u| %>
+      
+      <% if (Time.now.utc - u.updated_on) > 3600*24 %>
         <% passtime_class = "old" %>
       <% elsif %>
         <% passtime_class = "" %>
       <% end %>
       
-      <tr class='<%= passtime_class %>' style='background-color: <%= @rmlb_location.color %> '>
-          <% if @rmlb_display_id == 'true' %><td><%= u.login %></td><% end %>
-          <td><%= link_to u.name, project_rmlb_location_path(@project, @rmlb_location) %></td>
-          <td><%= @rmlb_location.location %></td>
-          <td><%= @rmlb_location.start_time %></td>
-          <td><%= @rmlb_location.end_time %></td>
-          <td><%= @rmlb_location.memo %></td>
-          <td><%= @rmlb_location.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></td>
+      <tr class='<%= passtime_class %>' style='background-color: <%= u.color %> '>
+          <% if @rmlb_display_id == 'true' %><td><%= u.user.login %></td><% end %>
+          <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><td><%= u.user_priority %></td><% end %><% end %>
+          <td><%= link_to u.user.name, project_rmlb_location_path(@project, u) %></td>
+          <td><%= u.location %></td>
+          <td><%= u.start_time %></td>
+          <td><%= u.end_time %></td>
+          <td><%= u.memo %></td>
+          <td><%= u.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></td>
           <td></td>
+          
       </tr>
     <% end %>
   </table>

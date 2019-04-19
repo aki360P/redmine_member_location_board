@@ -4,6 +4,7 @@
 <div class='settings_for_plugin'>
   <h2>Global Setting</h2>
   <p><%= content_tag(:label, l(:label_rmlb_display_id)) %><%= check_box_tag 'settings[rmlb_display_id]', true, @settings['rmlb_display_id'] == "true" %></p>
+  <p><%= content_tag(:label, l(:label_rmlb_priority_sort)) %><%= check_box_tag 'settings[rmlb_priority_sort]', true, @settings['rmlb_priority_sort'] == "true" %></p>
   
   <br>
   <h2>Location Group 1</h2>

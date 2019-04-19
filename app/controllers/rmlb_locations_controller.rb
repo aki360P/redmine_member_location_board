@@ -14,6 +14,7 @@ class RmlbLocationsController < ApplicationController
 
   def index
     @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
+    @rmlb_priority_sort = Setting.plugin_redmine_member_location_board['rmlb_priority_sort']
     
     @rmlb_group_name_1 = Setting.plugin_redmine_member_location_board['rmlb_group_name_1']
     @rmlb_group_color_1 = Setting.plugin_redmine_member_location_board['rmlb_group_color_1']
@@ -38,13 +39,24 @@ class RmlbLocationsController < ApplicationController
     @rmlb_group_list_7 = Setting.plugin_redmine_member_location_board['rmlb_group_list_7'].split(/\r\n/)
     
     @user_is_manager = 0
-    if User.current.allowed_to?(:edit_project, @project) 
+    if User.current.allowed_to?(:edit_project, @project) or User.current.admin?
       @user_is_manager = 1
     end
     
     @user_current = User.current
+    
 
-    @rmlb_projectusers = @project.assignable_users.sort_by{|u| u.login }
+    # @rmlb_projectusers = @project.assignable_users.sort_by{|u| u.login }
+    
+    @rmlb_location = RmlbLocation.find(@project.assignable_users.ids)
+    
+    #sort default
+    @rmlb_location.sort_by!{|u| u.user.login }
+    
+    #sort option
+    if @rmlb_priority_sort == 'true'
+      @rmlb_location.sort_by!{|u| u.user_priority }
+    end
     
     if params[:id].nil?
       @rmlb_location_edit = RmlbLocation.find_or_create(User.current.id)
@@ -71,9 +83,13 @@ class RmlbLocationsController < ApplicationController
       aaa.color = aaa.location.rpartition(":")[0]
       aaa.location = aaa.location.rpartition(":")[2]
       
-      aaa.save
+      if aaa.save
         flash[:notice] = l(:notice_successful_update)
         redirect_to project_rmlb_locations_path(:project => @project.name)
+      else
+        flash[:notice] = l(:rmlb_save_error)
+        redirect_to project_rmlb_locations_path(:project => @project.name)
+      end
     end
   end
 

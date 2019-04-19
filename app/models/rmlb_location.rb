@@ -13,6 +13,7 @@ class RmlbLocation < ActiveRecord::Base
   attr_accessible :color
   attr_accessible :start_time, :end_time
   attr_accessible :memo
+  attr_accessible :user_priority
 
   def self.find_or_create(user_id)
     rmlb_location = RmlbLocation.where(['user_id = ?', user_id]).first
@@ -22,6 +23,7 @@ class RmlbLocation < ActiveRecord::Base
       rmlb_location.user_id = user_id
       
       # Set default
+      rmlb_location.user_priority = '50'
       rmlb_location.location = ''
       rmlb_location.color = ''
       rmlb_location.start_time = ''
@@ -32,5 +34,11 @@ class RmlbLocation < ActiveRecord::Base
     end
     rmlb_location
   end
-
+  
+  def self.create_all(user_ids)
+    user_ids.each do |u|
+      find_or_create(u)
+    end
+  end
+  
 end
