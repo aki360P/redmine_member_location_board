@@ -53,15 +53,16 @@ class RmlbLocationsController < ApplicationController
     
     if params[:id].nil?
       @rmlb_location_edit = RmlbLocation.find_or_create(User.current.id)
+      
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => @rmlb_locations }
+        format.json { render :json => @rmlb_locations }
+      end
     else
-      @rmlb_location_edit = RmlbLocation.find_or_create(params[:id])
+      @rmlb_location_edit = RmlbLocation.find(params[:id])
     end
     
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @rmlb_locations }
-      format.json { render :json => @rmlb_locations }
-    end
   end
   
   def show
