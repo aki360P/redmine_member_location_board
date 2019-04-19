@@ -4,15 +4,10 @@ class RmlbLocationsController < ApplicationController
 
   def initialize
     super()    #bodyˆÈŠO‚Íredmine view‚ðŒp³
-    
-    if Rails::VERSION::MAJOR < 3
-      @base_url = Redmine::Utils::relative_url_root
-    else
-      @base_url = config.relative_url_root
-    end
   end
 
   def index
+    
     @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
     @rmlb_priority_sort = Setting.plugin_redmine_member_location_board['rmlb_priority_sort']
     

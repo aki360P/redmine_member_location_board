@@ -1,6 +1,11 @@
 <br/>
 
 
+<script type="text/javascript">
+    var api_key = "<%= User.current.api_key %>";
+    var baseUrl = "<%= config.relative_url_root %>";
+    var project_id = "<%= @project.id %>"
+</script>
 
 
 <!-- library 読み込み  -->
@@ -27,7 +32,7 @@
       <th class="f"><%= content_tag(:label, l(:label_rmlb_memo))%></th>
       <th class="g"><%= content_tag(:label, l(:label_rmlb_update))%></th>
       <th class="h"><%= content_tag(:label, l(:label_rmlb_edit))%></th>
-      
+    </tr>
       
     
     <% @rmlb_locations.each do |u| %>
@@ -52,7 +57,9 @@
       </tr>
     <% end %>
   </table>
-
+  <br>
+  <br>
+  
   
 </div>
 

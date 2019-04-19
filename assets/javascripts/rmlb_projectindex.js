@@ -1,3 +1,5 @@
+  var eventsJSON = [];
+  var event_json_text =[];
 
 $(function(){
     $("#rmlb_check1").click(function() {
@@ -51,4 +53,54 @@ $(function(){
 	
 	load_checkbox();
 	
+	
+		var getEventsJSON = function() {
+			var url = baseUrl + '/projects/' + project_id + '/rmlb_locations.json';
+			var offset = 0;
+			console.log("ajax読み込み %s", url);
+			
+			$.ajax({
+				url : url,
+				dataType : 'json',
+				
+				
+				success: function(res){ 
+					console.log("ajax読み込み成功 %s", url);
+					console.dir(res);
+					
+					buildEventsJSON(res, offset == 0);  //offset==0のときはtrue
+					},
+					
+				error: function(){ console.log("ajax失敗 %s", url);  }
+				
+			});
+	};
+	
+	var buildEventsJSON = function(eventsRawJSON, clear) {
+          console.log('Building JSON');
+          var count = eventsRawJSON.length;
+          var event = eventsRawJSON;
+          
+          //clearにtrue送られてきたときのときは，初期化
+          if (clear) {
+              eventsJSON = {events:[]};
+          }
+          
+          for (var i = 0; i < count; i++) {
+              eventsJSON["events"].push({
+              			user_id: event[i].user_id,
+						user_priority: event[i].user_priority,
+						location: event[i].location,
+						color: event[i].color,
+						start_time: event[i].start_time,
+						end_time: event[i].end_time,
+						memo: event[i].memo,
+						updated_on: event[i].updated_on
+              });
+          }
+          return true;
+      };
+	
+	
+	// getEventsJSON();
 });
