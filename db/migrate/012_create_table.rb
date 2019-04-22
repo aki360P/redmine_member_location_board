@@ -1,4 +1,4 @@
-class CreateTable < ActiveRecord::CompatibleLegacyMigration.migration_class
+class CreateTable < ActiveRecord::Migration
   def self.up
     drop_table :rmlb_locations
     

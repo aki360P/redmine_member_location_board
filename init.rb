@@ -20,9 +20,9 @@ Redmine::Plugin.register :redmine_member_location_board do
   # setting
   settings  partial: 'rmlb_settings/show',
             default: {
-              :rmlb_display_id => 'false',
-              :rmlb_priority_sort => 'false',
-              :rmlb_group_name_1 => 'Location Group 1',
-              :rmlb_group_list_1 => 'Set location as a list in the admin plugin setting field. Comma separated is not recognized',
+              'rmlb_display_id' => 'false',
+              'rmlb_priority_sort' => 'false',
+              'rmlb_group_name_1' => 'Location Group 1',
+              'rmlb_group_list_1' => 'Set location \r\n as a list \r\n in the admin \r\n plugin setting field. \r\n Comma separated \r\n is not recognized',
                }
 end
