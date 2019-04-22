@@ -8,10 +8,15 @@ en:
   label_rmlb_loginid: "Login ID"
   label_rmlb_name: "Nmae"
   label_rmlb_location: "Location"
+  label_rmlb_group_name: "Group name"
+  label_rmlb_group_color: "Background color"
+  label_rmlb_group_list: "Location list"
   label_rmlb_start: "Start time"
   label_rmlb_end: "End time"
   label_rmlb_memo: "Memo"
   label_rmlb_update: "Last update"
   label_rmlb_edit: "Edit"
-  
+  label_rmlb_display_id: "display Login ID"
+  label_rmlb_priority_sort: "sort by optional priority field"
+  label_rmlb_priority: "display priority"
   
