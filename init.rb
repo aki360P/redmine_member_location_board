@@ -23,6 +23,25 @@ Redmine::Plugin.register :redmine_member_location_board do
               'rmlb_display_id' => 'false',
               'rmlb_priority_sort' => 'false',
               'rmlb_group_name_1' => 'Location Group 1',
-              'rmlb_group_list_1' => 'Set location as a list in the admin plugin setting field. Comma separated is not recognized.'
+              'rmlb_group_name_2' => '',
+              'rmlb_group_name_3' => '',
+              'rmlb_group_name_4' => '',
+              'rmlb_group_name_5' => '',
+              'rmlb_group_name_6' => '',
+              'rmlb_group_name_7' => '',
+              'rmlb_group_color_1' => '',
+              'rmlb_group_color_2' => '',
+              'rmlb_group_color_3' => '',
+              'rmlb_group_color_4' => '',
+              'rmlb_group_color_5' => '',
+              'rmlb_group_color_6' => '',
+              'rmlb_group_color_7' => '',
+              'rmlb_group_list_1' => 'Set location as a list in the admin plugin setting field. Comma separated is not recognized.',
+              'rmlb_group_list_2' => '',
+              'rmlb_group_list_3' => '',
+              'rmlb_group_list_4' => '',
+              'rmlb_group_list_5' => '',
+              'rmlb_group_list_6' => '',
+              'rmlb_group_list_7' => ''
                }
 end
