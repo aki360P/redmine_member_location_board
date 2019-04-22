@@ -11,6 +11,7 @@ class RmlbLocationsController < ApplicationController
     @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
     @rmlb_priority_sort = Setting.plugin_redmine_member_location_board['rmlb_priority_sort']
     
+
     @rmlb_group_name_1 = Setting.plugin_redmine_member_location_board['rmlb_group_name_1']
     @rmlb_group_color_1 = Setting.plugin_redmine_member_location_board['rmlb_group_color_1']
     @rmlb_group_list_1 = Setting.plugin_redmine_member_location_board['rmlb_group_list_1'].split(/\r\n/)
@@ -32,6 +33,7 @@ class RmlbLocationsController < ApplicationController
     @rmlb_group_name_7 = Setting.plugin_redmine_member_location_board['rmlb_group_name_7']
     @rmlb_group_color_7 = Setting.plugin_redmine_member_location_board['rmlb_group_color_7']
     @rmlb_group_list_7 = Setting.plugin_redmine_member_location_board['rmlb_group_list_7'].split(/\r\n/)
+    
     
     @user_is_manager = 0
     if User.current.allowed_to?(:edit_project, @project) or User.current.admin?
