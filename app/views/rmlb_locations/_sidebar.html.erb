@@ -16,7 +16,7 @@
                   <%= @rmlb_location_edit.end_time %>
                 <% end %></p>
     <p><%= content_tag(:label, l(:label_rmlb_memo))%> : &nbsp;   <%= f.text_field(:memo, value: @rmlb_location_edit.memo, :size => "20x1", :maxlength => 30) %></p>
-    <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager = 1 %><p><%= content_tag(:label, l(:label_rmlb_priority))%> : &nbsp; <%= f.text_field(:user_priority, value: @rmlb_location_edit.user_priority, :maxlength => 3) %></p><% end %><% end %>
+    <% if @user_is_manager == 1 %><p><%= content_tag(:label, l(:label_rmlb_priority))%> : &nbsp; <%= f.text_field(:user_priority, value: @rmlb_location_edit.user_priority, :maxlength => 3) %></p><% end %>
     <br>
     
     <p><u><%= content_tag(:label, l(:label_rmlb_location)) %></u>  <label><%= f.radio_button :location, '' %>unknown</label><br>  </p>

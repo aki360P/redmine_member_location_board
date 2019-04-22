@@ -1,6 +1,6 @@
 class RmlbLocationsController < ApplicationController
   unloadable
-  before_filter :find_user, :find_project
+  before_filter :find_user, :find_project, :authorize
 
   def initialize
     super()    #bodyˆÈŠO‚Íredmine view‚ðŒp³

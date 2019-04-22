@@ -8,8 +8,8 @@ Redmine::Plugin.register :redmine_member_location_board do
   url 'https://github.com/aki360P/redmine_member_location_board'
   
   project_module :redmine_member_location_board do
-    permission :rmlb_location_view, :rmlb_locations => 'index', :public => true
-    permission :rmlb_location_edit, :rmlb_locations => 'update',  :require=>:member
+    permission :rmlb_location_view, :rmlb_locations => [:index, :show]
+    permission :rmlb_location_edit, :rmlb_locations => [:update]
   end
   
   
