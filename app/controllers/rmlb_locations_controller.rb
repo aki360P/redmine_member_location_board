@@ -1,6 +1,6 @@
 class RmlbLocationsController < ApplicationController
   unloadable
-  before_filter :find_user, :find_project, :authorize
+  before_action :find_user, :find_project, :authorize
 
   def initialize
     super()    #bodyˆÈŠO‚Íredmine view‚ðŒp³
@@ -42,8 +42,8 @@ class RmlbLocationsController < ApplicationController
     
     @user_current = User.current
     
-    RmlbLocation.create_all(@project.assignable_users.ids)
-    @rmlb_locations = RmlbLocation.find(@project.assignable_users.ids)
+    RmlbLocation.create_all(@project.users.ids)
+    @rmlb_locations = RmlbLocation.find(@project.users.ids)
     
     #sort default
     @rmlb_locations.sort_by!{|u| u.user.login }
@@ -74,25 +74,17 @@ class RmlbLocationsController < ApplicationController
 
   
   def update
-    unless params[:rmlb_location].nil?
+    return if params[:rmlb_location].nil?
+
       aaa = RmlbLocation.find(params[:id])
       
-      puts '------------------------------'
-      puts params[:rmlb_location].to_a
-      puts '------------------------------'
+      aaa.update(rmlb_location_params)
+      aaa.attributes = { color: aaa.location.rpartition(":")[0], location: aaa.location.rpartition(":")[2] }
       
-      aaa.update_attributes(params[:rmlb_location])
-      aaa.color = aaa.location.rpartition(":")[0]
-      aaa.location = aaa.location.rpartition(":")[2]
-      
-      if aaa.save
-        flash[:notice] = l(:notice_successful_update)
-        redirect_to project_rmlb_locations_path(:project => @project.name)
-      else
-        flash[:notice] = l(:rmlb_save_error)
-        redirect_to project_rmlb_locations_path(:project => @project.name)
-      end
-    end
+      aaa.save
+      flash[:notice] = l(:notice_successful_update)
+      redirect_to project_rmlb_locations_path(:project => @project.name)
+
   end
 
   private
@@ -105,6 +97,10 @@ class RmlbLocationsController < ApplicationController
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+  
+  def rmlb_location_params
+    params.require(:rmlb_location).permit('user_priority', 'location', 'color', 'start_time', 'end_time', 'memo')
   end
     
 end
