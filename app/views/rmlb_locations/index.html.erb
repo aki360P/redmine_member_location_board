@@ -23,8 +23,8 @@
 
   <table id="rmlb_board" border=1px>
     <tr>
-      <% if @rmlb_display_id == 'true' %><th class="a"><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>
-      <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><th class="h"><%= content_tag(:label, l(:label_rmlb_priority))%></th><% end %><% end %>
+      <% if @rmlb_display_id == 'true' %><th class="aa"><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>
+      <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><th class="ab"><%= content_tag(:label, l(:label_rmlb_priority))%></th><% end %><% end %>
       <th class="b"><%= content_tag(:label, l(:label_rmlb_name))%></th>
       <th class="c"><%= content_tag(:label, l(:label_rmlb_location))%></th>
       <th class="d"><%= content_tag(:label, l(:label_rmlb_start))%></th>
@@ -46,13 +46,13 @@
       <tr class='<%= passtime_class %>' style='background-color: <%= u.color %> '>
           <% if @rmlb_display_id == 'true' %><td><%= u.user.login %></td><% end %>
           <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><td><%= u.user_priority %></td><% end %><% end %>
-          <td><%= link_to u.user.name, project_rmlb_location_path(@project, u) %></td>
+          <td><%= u.user.name %></td>
           <td><%= u.location %></td>
           <td><%= u.start_time %></td>
           <td><%= u.end_time %></td>
           <td><%= u.memo %></td>
           <td><%= u.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></td>
-          <td></td>
+          <td><%= link_to 'edit', project_rmlb_location_path(@project, u) %></td>
           
       </tr>
     <% end %>
