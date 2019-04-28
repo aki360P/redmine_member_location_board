@@ -12,27 +12,40 @@ This plugin provides the member location board.
 * (optional) Display background color
 
 
-## Installation notes
-#### Install
-1. go to plugins folder
-git clone ttps://github.com/aki360P/redmine_member_location_board.git
-2. bundle install or change source code
-bundle install
-3. migration
-rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=production
-4. restart server
+h2. Installation notes
 
-Skip bundle install(change source code)
-delete Gemfile in ./plugins/redmine_member_location_board
-change source code 001_create_table.rb in ./plugins/redmine_member_location_board/db/migrate
+h3. Install
+
+# go to plugins folder
+<pre>
+git clone https://github.com/aki360P/redmine_member_location_board.git
+</pre>
+# bundle install or change source code
+<pre>
+bundle install
+</pre>
+# migration
+<pre>
+rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=production
+</pre>
+# restart server
+
+h3. How to skip bundle install(change source code)
+
+* delete Gemfile in ./plugins/redmine_member_location_board
+* change source code 001_create_table.rb in ./plugins/redmine_member_location_board/db/migrate.
+ First line needs to be changed according to your rails version
+<pre>
  class CreateTable < ActiveRecord::CompatibleLegacyMigration.migration_class
   #for redmine 3x,  class CreateTable < ActiveRecord::Migration
   #for redmine 4x,  class CreateTable < ActiveRecord::Migration[4.2]
-First line needs to be changed according to your rails version
+</pre>
 
+h3. UnInstall
 
-#### UnInstall
+<pre>
 rake redmine:plugins:migrate NAME=redmine_member_location_board VERSION=0 RAILS_ENV=production
+</pre>
 
 # Screen shots
 #### Overview
