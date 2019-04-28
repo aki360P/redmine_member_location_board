@@ -5,32 +5,32 @@
 This plugin provides the member location board.
 
 
-#### Main features
+## Main features
 * Display project member location
 * (optional) Show login ID
 * (optional) Sort manually
 * (optional) Display background color
 
 
-h2. Installation notes
+# Installation notes
 
-h3. Install
+## Install
 
-# go to plugins folder
+1. go to plugins folder
 <pre>
 git clone https://github.com/aki360P/redmine_member_location_board.git
 </pre>
-# bundle install or change source code
+2. bundle install or change source code
 <pre>
 bundle install
 </pre>
-# migration
+3. migration
 <pre>
 rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=production
 </pre>
-# restart server
+4. restart server
 
-h3. How to skip bundle install(change source code)
+### How to skip bundle install(change source code)
 
 * delete Gemfile in ./plugins/redmine_member_location_board
 * change source code 001_create_table.rb in ./plugins/redmine_member_location_board/db/migrate.
@@ -41,7 +41,7 @@ h3. How to skip bundle install(change source code)
   #for redmine 4x,  class CreateTable < ActiveRecord::Migration[4.2]
 </pre>
 
-h3. UnInstall
+## UnInstall
 
 <pre>
 rake redmine:plugins:migrate NAME=redmine_member_location_board VERSION=0 RAILS_ENV=production
