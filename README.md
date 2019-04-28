@@ -11,7 +11,7 @@ This plugin provides the member location board.
 * (optional) Sort manually
 * (optional) Display background color
 
-# Screen shots
+# Screenshots
 #### Overview
 ![sample screenshot](./images/screenshot01.png "overview")
 
