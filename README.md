@@ -11,6 +11,12 @@ This plugin provides the member location board.
 * (optional) Sort manually
 * (optional) Display background color
 
+# Screen shots
+#### Overview
+![sample screenshot](./images/screenshot01.png "overview")
+
+#### Plugin Setting
+![sample screenshot](./images/screenshot02.png "plugin setting")
 
 # Installation notes
 
@@ -46,10 +52,3 @@ rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=produc
 <pre>
 rake redmine:plugins:migrate NAME=redmine_member_location_board VERSION=0 RAILS_ENV=production
 </pre>
-
-# Screen shots
-#### Overview
-![sample screenshot](./images/screenshot01.png "overview")
-
-#### Plugin Setting
-![sample screenshot](./images/screenshot02.png "plugin setting")
