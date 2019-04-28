@@ -6,7 +6,7 @@ en:
   
   label_rmlb: "Location Board"
   label_rmlb_loginid: "Login ID"
-  label_rmlb_name: "Nmae"
+  label_rmlb_name: "Name"
   label_rmlb_location: "Location"
   label_rmlb_group_name: "Group name"
   label_rmlb_group_color: "Background color"
