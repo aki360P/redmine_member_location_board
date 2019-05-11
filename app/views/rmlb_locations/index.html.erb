@@ -25,13 +25,13 @@
     <tr>
       <% if @rmlb_display_id == 'true' %><th class="aa"><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>
       <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><th class="ab"><%= content_tag(:label, l(:label_rmlb_priority))%></th><% end %><% end %>
-      <th class="b"><%= content_tag(:label, l(:label_rmlb_name))%></th>
-      <th class="c"><%= content_tag(:label, l(:label_rmlb_location))%></th>
-      <th class="d"><%= content_tag(:label, l(:label_rmlb_start))%></th>
-      <th class="e"><%= content_tag(:label, l(:label_rmlb_end))%></th>
-      <th class="f"><%= content_tag(:label, l(:label_rmlb_memo))%></th>
+      <th class="b" width="120"><%= content_tag(:label, l(:label_rmlb_name))%></th>
+      <th class="c" width="120"><%= content_tag(:label, l(:label_rmlb_location))%></th>
+      <th class="d" width="50"><%= content_tag(:label, l(:label_rmlb_start))%></th>
+      <th class="e" width="50"><%= content_tag(:label, l(:label_rmlb_end))%></th>
+      <th class="f" width="250"><%= content_tag(:label, l(:label_rmlb_memo))%></th>
       <th class="g"><%= content_tag(:label, l(:label_rmlb_update))%></th>
-      <th class="h"><%= content_tag(:label, l(:label_rmlb_edit))%></th>
+      <th class="h" width="50"><%= content_tag(:label, l(:label_rmlb_edit))%></th>
     </tr>
       
     
@@ -48,8 +48,8 @@
           <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><td><%= u.user_priority %></td><% end %><% end %>
           <td><%= u.user.name %></td>
           <td><%= u.location %></td>
-          <td><%= u.start_time %></td>
-          <td><%= u.end_time %></td>
+          <td align="center" ><%= u.start_time %></td>
+          <td align="center" ><%= u.end_time %></td>
           <td><%= u.memo %></td>
           <td><%= u.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></td>
           <td><%= link_to 'edit', project_rmlb_location_path(@project, u) %></td>
