@@ -36,7 +36,7 @@ Redmine::Plugin.register :redmine_member_location_board do
               'rmlb_group_color_5' => '',
               'rmlb_group_color_6' => '',
               'rmlb_group_color_7' => '',
-              'rmlb_group_list_1' => 'Set location as a list in the admin plugin setting field. Comma separated is not recognized.',
+              'rmlb_group_list_1' => 'Set locations as a list in the admin plugin setting field. Comma separated is not recognized.',
               'rmlb_group_list_2' => '',
               'rmlb_group_list_3' => '',
               'rmlb_group_list_4' => '',

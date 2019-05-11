@@ -1,40 +1,13 @@
 class RmlbLocationsController < ApplicationController
   unloadable
-  before_action :find_user, :find_project, :authorize
+  before_action :find_user, :find_project, :authorize, :load_config
 
   def initialize
     super()    #bodyˆÈŠO‚Íredmine view‚ðŒp³
   end
 
   def index
-    
-    @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
-    @rmlb_priority_sort = Setting.plugin_redmine_member_location_board['rmlb_priority_sort']
-    
 
-    @rmlb_group_name_1 = Setting.plugin_redmine_member_location_board['rmlb_group_name_1']
-    @rmlb_group_color_1 = Setting.plugin_redmine_member_location_board['rmlb_group_color_1']
-    @rmlb_group_list_1 = Setting.plugin_redmine_member_location_board['rmlb_group_list_1'].split(/\r\n/)
-    @rmlb_group_name_2 = Setting.plugin_redmine_member_location_board['rmlb_group_name_2']
-    @rmlb_group_color_2 = Setting.plugin_redmine_member_location_board['rmlb_group_color_2']
-    @rmlb_group_list_2 = Setting.plugin_redmine_member_location_board['rmlb_group_list_2'].split(/\r\n/)
-    @rmlb_group_name_3 = Setting.plugin_redmine_member_location_board['rmlb_group_name_3']
-    @rmlb_group_color_3 = Setting.plugin_redmine_member_location_board['rmlb_group_color_3']
-    @rmlb_group_list_3 = Setting.plugin_redmine_member_location_board['rmlb_group_list_3'].split(/\r\n/)
-    @rmlb_group_name_4 = Setting.plugin_redmine_member_location_board['rmlb_group_name_4']
-    @rmlb_group_color_4 = Setting.plugin_redmine_member_location_board['rmlb_group_color_4']
-    @rmlb_group_list_4 = Setting.plugin_redmine_member_location_board['rmlb_group_list_4'].split(/\r\n/)
-    @rmlb_group_name_5 = Setting.plugin_redmine_member_location_board['rmlb_group_name_5']
-    @rmlb_group_color_5 = Setting.plugin_redmine_member_location_board['rmlb_group_color_5']
-    @rmlb_group_list_5 = Setting.plugin_redmine_member_location_board['rmlb_group_list_5'].split(/\r\n/)
-    @rmlb_group_name_6 = Setting.plugin_redmine_member_location_board['rmlb_group_name_6']
-    @rmlb_group_color_6 = Setting.plugin_redmine_member_location_board['rmlb_group_color_6']
-    @rmlb_group_list_6 = Setting.plugin_redmine_member_location_board['rmlb_group_list_6'].split(/\r\n/)
-    @rmlb_group_name_7 = Setting.plugin_redmine_member_location_board['rmlb_group_name_7']
-    @rmlb_group_color_7 = Setting.plugin_redmine_member_location_board['rmlb_group_color_7']
-    @rmlb_group_list_7 = Setting.plugin_redmine_member_location_board['rmlb_group_list_7'].split(/\r\n/)
-    
-    
     @user_is_manager = 0
     if User.current.allowed_to?(:edit_project, @project) or User.current.admin?
       @user_is_manager = 1
@@ -101,6 +74,37 @@ class RmlbLocationsController < ApplicationController
   
   def rmlb_location_params
     params.require(:rmlb_location).permit('user_priority', 'location', 'color', 'start_time', 'end_time', 'memo')
+  end
+  
+  def load_config
+    if Setting.plugin_redmine_member_location_board.nil?
+      redirect_to plugin_settings_path(:id => :redmine_member_location_board)
+    else
+      @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
+      @rmlb_priority_sort = Setting.plugin_redmine_member_location_board['rmlb_priority_sort']
+      
+      @rmlb_group_name_1 = Setting.plugin_redmine_member_location_board['rmlb_group_name_1']
+      @rmlb_group_color_1 = Setting.plugin_redmine_member_location_board['rmlb_group_color_1']
+      @rmlb_group_list_1 = Setting.plugin_redmine_member_location_board['rmlb_group_list_1'].split(/\r\n/)
+      @rmlb_group_name_2 = Setting.plugin_redmine_member_location_board['rmlb_group_name_2']
+      @rmlb_group_color_2 = Setting.plugin_redmine_member_location_board['rmlb_group_color_2']
+      @rmlb_group_list_2 = Setting.plugin_redmine_member_location_board['rmlb_group_list_2'].split(/\r\n/)
+      @rmlb_group_name_3 = Setting.plugin_redmine_member_location_board['rmlb_group_name_3']
+      @rmlb_group_color_3 = Setting.plugin_redmine_member_location_board['rmlb_group_color_3']
+      @rmlb_group_list_3 = Setting.plugin_redmine_member_location_board['rmlb_group_list_3'].split(/\r\n/)
+      @rmlb_group_name_4 = Setting.plugin_redmine_member_location_board['rmlb_group_name_4']
+      @rmlb_group_color_4 = Setting.plugin_redmine_member_location_board['rmlb_group_color_4']
+      @rmlb_group_list_4 = Setting.plugin_redmine_member_location_board['rmlb_group_list_4'].split(/\r\n/)
+      @rmlb_group_name_5 = Setting.plugin_redmine_member_location_board['rmlb_group_name_5']
+      @rmlb_group_color_5 = Setting.plugin_redmine_member_location_board['rmlb_group_color_5']
+      @rmlb_group_list_5 = Setting.plugin_redmine_member_location_board['rmlb_group_list_5'].split(/\r\n/)
+      @rmlb_group_name_6 = Setting.plugin_redmine_member_location_board['rmlb_group_name_6']
+      @rmlb_group_color_6 = Setting.plugin_redmine_member_location_board['rmlb_group_color_6']
+      @rmlb_group_list_6 = Setting.plugin_redmine_member_location_board['rmlb_group_list_6'].split(/\r\n/)
+      @rmlb_group_name_7 = Setting.plugin_redmine_member_location_board['rmlb_group_name_7']
+      @rmlb_group_color_7 = Setting.plugin_redmine_member_location_board['rmlb_group_color_7']
+      @rmlb_group_list_7 = Setting.plugin_redmine_member_location_board['rmlb_group_list_7'].split(/\r\n/)
+    end
   end
     
 end
