@@ -29,7 +29,8 @@
       <th class="c" width="120"><%= content_tag(:label, l(:label_rmlb_location))%></th>
       <th class="d" width="50"><%= content_tag(:label, l(:label_rmlb_start))%></th>
       <th class="e" width="50"><%= content_tag(:label, l(:label_rmlb_end))%></th>
-      <th class="f" width="250"><%= content_tag(:label, l(:label_rmlb_memo))%></th>
+      <th class="fa" width="250"><%= content_tag(:label, l(:label_rmlb_memo))%></th>
+      <% if @rmlb_display_feeling == 'true' %><th class="fb" width="50"><%= content_tag(:label, l(:label_rmlb_feeling))%></th><% end %>
       <th class="g"><%= content_tag(:label, l(:label_rmlb_update))%></th>
       <th class="h" width="50"><%= content_tag(:label, l(:label_rmlb_edit))%></th>
     </tr>
@@ -43,7 +44,7 @@
         <% passtime_class = "" %>
       <% end %>
       
-      <tr class='<%= passtime_class %>' style='background-color: <%= u.color %> '>
+      <tr class='<%= passtime_class %>' style='background-color: <%= u.color %> ' height="30">
           <% if @rmlb_display_id == 'true' %><td><%= u.user.login %></td><% end %>
           <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><td><%= u.user_priority %></td><% end %><% end %>
           <td><%= u.user.name %></td>
@@ -51,6 +52,7 @@
           <td align="center" ><%= u.start_time %></td>
           <td align="center" ><%= u.end_time %></td>
           <td><%= u.memo %></td>
+          <% if @rmlb_display_feeling == 'true' %><td align="center"><%= image_tag(rmlb_image_path(u.feeling)) unless u.feeling.nil? %></td><% end %>
           <td><%= u.updated_on.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></td>
           <td><%= link_to 'edit', project_rmlb_location_path(@project, u) %></td>
           

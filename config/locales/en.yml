@@ -19,4 +19,11 @@ en:
   label_rmlb_display_id: "display Login ID"
   label_rmlb_priority_sort: "sort by optional priority field"
   label_rmlb_priority: "display priority"
+  label_rmlb_display_feeling: "display feeling"
+  label_rmlb_feeling: "my feeling"
+  label_rmlb_feeling_5: "Great"
+  label_rmlb_feeling_4: "Good"
+  label_rmlb_feeling_3: "Ordinary"
+  label_rmlb_feeling_2: "Not too bad"
+  label_rmlb_feeling_1: "Bad"
   

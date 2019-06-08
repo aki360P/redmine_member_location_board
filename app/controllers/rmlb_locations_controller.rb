@@ -59,6 +59,16 @@ class RmlbLocationsController < ApplicationController
       redirect_to project_rmlb_locations_path(:project => @project.name)
 
   end
+  
+  
+  def rmlb_image_path(feeling)
+    unless feeling.nil?
+      path = '/plugin_assets/redmine_member_location_board/images/' + Setting.plugin_redmine_member_location_board['rmlb_image_folder'] + '/' + feeling.to_s + '.png'
+    else
+      nil
+    end
+  end
+  helper_method :rmlb_image_path
 
   private
 
@@ -73,7 +83,7 @@ class RmlbLocationsController < ApplicationController
   end
   
   def rmlb_location_params
-    params.require(:rmlb_location).permit('user_priority', 'location', 'color', 'start_time', 'end_time', 'memo')
+    params.require(:rmlb_location).permit('user_priority', 'location', 'color', 'start_time', 'end_time', 'memo', 'feeling')
   end
   
   def load_config
@@ -82,6 +92,7 @@ class RmlbLocationsController < ApplicationController
     else
       @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
       @rmlb_priority_sort = Setting.plugin_redmine_member_location_board['rmlb_priority_sort']
+      @rmlb_display_feeling = Setting.plugin_redmine_member_location_board['rmlb_display_feeling']
       
       @rmlb_group_name_1 = Setting.plugin_redmine_member_location_board['rmlb_group_name_1']
       @rmlb_group_color_1 = Setting.plugin_redmine_member_location_board['rmlb_group_color_1']

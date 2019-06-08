@@ -5,6 +5,11 @@
   <h2>Global Setting</h2>
   <p><%= content_tag(:label, l(:label_rmlb_display_id)) %><%= check_box_tag 'settings[rmlb_display_id]', true, @settings['rmlb_display_id'] == "true" %></p>
   <p><%= content_tag(:label, l(:label_rmlb_priority_sort)) %><%= check_box_tag 'settings[rmlb_priority_sort]', true, @settings['rmlb_priority_sort'] == "true" %></p>
+  <p><%= content_tag(:label, l(:label_rmlb_display_feeling)) %><%= check_box_tag 'settings[rmlb_display_feeling]', true, @settings['rmlb_display_feeling'] == "true" %></p>
+  <% folders = Dir.glob('public/plugin_assets/redmine_member_location_board/images/*') %>
+  <% folders.each {|f| f.gsub!('public/plugin_assets/redmine_member_location_board/images/','')} %>
+  <% folders.unshift("") %>
+  <p><%= content_tag(:label, l(:label_rmlb_feeling)) %><%= select_tag('settings[rmlb_image_folder]',options_for_select(folders,@settings['rmlb_image_folder'])) %></p>
   
   <br>
   <h2>Location Group 1</h2>

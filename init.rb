@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_member_location_board do
   name 'Redmine Member Location Board plugin'
   author 'Akinori Iwasaki'
   description 'Provides a member location board'
-  version '1.0.1'
+  version '1.1.0'
   url 'https://github.com/aki360P/redmine_member_location_board'
   
   project_module :redmine_member_location_board do
@@ -22,6 +22,8 @@ Redmine::Plugin.register :redmine_member_location_board do
             default: {
               'rmlb_display_id' => 'false',
               'rmlb_priority_sort' => 'false',
+              'rmlb_display_feeling' => 'false',
+              'rmlb_image_folder' => '',
               'rmlb_group_name_1' => 'Location Group 1',
               'rmlb_group_name_2' => '',
               'rmlb_group_name_3' => '',

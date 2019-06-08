@@ -19,4 +19,12 @@ ja:
   label_rmlb_display_id: "ログインIDを表示する"
   label_rmlb_priority_sort: "ユーザ設定の優先度でソートする"
   label_rmlb_priority: "表示優先順"
+  label_rmlb_display_feeling: "今日の気分を表示する"
+  label_rmlb_feeling: "今日の気分"
+  label_rmlb_feeling_5: "素晴らしい"
+  label_rmlb_feeling_4: "いい"
+  label_rmlb_feeling_3: "まあまあ"
+  label_rmlb_feeling_2: "悪い"
+  label_rmlb_feeling_1: "最悪"
+  
   
