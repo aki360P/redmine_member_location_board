@@ -8,19 +8,17 @@
     <p><%= content_tag(:label, l(:label_rmlb_name))%> : &nbsp;   <%= @rmlb_location_edit.user.name %></p>
     <p><%= content_tag(:label, l(:label_rmlb_start))%> : &nbsp; <%= f.text_field(:start_time, value: @rmlb_location_edit.start_time, :maxlength => 7) %></p>
     <p><%= content_tag(:label, l(:label_rmlb_end))%> : &nbsp; 
-                <% if @rmlb_location_edit.id == @user_current.id %>
-                  <%= f.text_field(:end_time, value: @rmlb_location_edit.end_time, :maxlength => 7) %>
-                <% elsif User.current.admin? %>
+                <% if @rmlb_location_edit.id == @user_current.id or User.current.admin? %>
                   <%= f.text_field(:end_time, value: @rmlb_location_edit.end_time, :maxlength => 7) %>
                 <% else %>
                   <%= @rmlb_location_edit.end_time %>
                 <% end %></p>
     <p><%= content_tag(:label, l(:label_rmlb_memo))%> : &nbsp;   <%= f.text_field(:memo, value: @rmlb_location_edit.memo, :size => "20x1", :maxlength => 30) %></p>
     <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><p><%= content_tag(:label, l(:label_rmlb_priority))%> : &nbsp; <%= f.text_field(:user_priority, value: @rmlb_location_edit.user_priority, :maxlength => 3) %></p><% end %><% end %>
-    <% if @rmlb_display_feeling == 'true' %>
+    <% if @rmlb_display_feeling == 'true' %><% if @rmlb_location_edit.id == @user_current.id or User.current.admin? %>
       <% feeling_select_option = [["",""],[l(:label_rmlb_feeling_5),5],[l(:label_rmlb_feeling_4),4],[l(:label_rmlb_feeling_3),3],[l(:label_rmlb_feeling_2),2],[l(:label_rmlb_feeling_1),1]] %>
       <p><%= content_tag(:label, l(:label_rmlb_feeling))%> : &nbsp;   <%= f.select(:feeling, options_for_select(feeling_select_option,@rmlb_location_edit.feeling)) %></p>
-    <% end %>
+    <% end %><% end %>
     <br>
     
     <p><u><%= content_tag(:label, l(:label_rmlb_location)) %></u>  <label><%= f.radio_button :location, '' %>unknown</label><br>  </p>
