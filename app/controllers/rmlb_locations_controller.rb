@@ -3,7 +3,7 @@ class RmlbLocationsController < ApplicationController
   before_action :find_user, :find_project, :authorize, :load_config
 
   def initialize
-    super()    #bodyˆÈŠO‚Íredmine view‚ðŒp³
+    super()    #bodyè¡¨ç¤ºã‚’å¼•ãç¶™ã
   end
 
   def index
@@ -14,7 +14,11 @@ class RmlbLocationsController < ApplicationController
     end
     
     @user_current = User.current
-    
+    @user_current_timezone = User.current.time_zone
+    unless @user_current_timezone.present? 
+      @user_current_timezone = Setting.default_users_time_zone
+    end
+
     RmlbLocation.create_all(@project.users.ids)
     @rmlb_locations = RmlbLocation.find(@project.users.ids)
     
