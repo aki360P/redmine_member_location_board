@@ -22,6 +22,18 @@ class RmlbLocationsController < ApplicationController
     RmlbLocation.create_all(@project.users.ids)
     @rmlb_locations = RmlbLocation.find(@project.users.ids)
     
+    @rmlb_groups = Principal.member_of(@project).where(['type = ?','Group'])
+    @rmlb_group_member_arry = []
+    unless @rmlb_groups.nil?
+      @rmlb_groups.each do |i|
+        @rmlb_group_member_arry.push(Group.find(i.id).users.ids)
+      end
+    end
+    arry1 = @project.users.ids
+    arry2 = @rmlb_group_member_arry.flatten
+    arry3 = arry1 - arry2
+    @rmlb_group_member_arry.push(arry3)
+    
     #sort default
     @rmlb_locations.sort_by!{|u| u.user.login }
     
@@ -121,5 +133,6 @@ class RmlbLocationsController < ApplicationController
       @rmlb_group_list_7 = Setting.plugin_redmine_member_location_board['rmlb_group_list_7'].split(/\r\n/)
     end
   end
-    
+
+
 end
