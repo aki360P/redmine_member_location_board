@@ -29,7 +29,7 @@
             <td align="center" ><%= u.start_time %></td>
             <td align="center" ><%= u.end_time %></td>
             <td><%= u.memo %></td>
-            <% if @rmlb_display_feeling == 'true' %><td align="center"><%= image_tag(rmlb_image_path(u.feeling)) unless u.feeling.nil? %></td><% end %>
+            <% if @rmlb_display_feeling == 'true' %><td align="center"><% if passtime_class != "old" %><%= image_tag(rmlb_image_path(u.feeling)) unless u.feeling.nil?  %><% end %></td><% end %>
             <td><%= u.updated_on.in_time_zone(@user_current_timezone).strftime('%Y/%m/%d %H:%M') %></td>
             <td><%= link_to 'edit', project_rmlb_location_path(@project, u) %></td>
             
