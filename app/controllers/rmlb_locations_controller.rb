@@ -15,8 +15,10 @@ class RmlbLocationsController < ApplicationController
     
     @user_current = User.current
     @user_current_timezone = User.current.time_zone
-    unless @user_current_timezone.present? 
-      @user_current_timezone = Setting.default_users_time_zone
+    if (Redmine::VERSION::MAJOR == 3 && Redmine::VERSION::MINOR >= 4)
+      unless @user_current_timezone.present?
+        @user_current_timezone = Setting.default_users_time_zone
+      end
     end
 
     RmlbLocation.create_all(@project.users.ids)
