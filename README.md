@@ -10,6 +10,7 @@ This plugin provides the member location board.
 * (optional) Show login ID
 * (optional) Sort manually
 * (optional) Display background color
+* (optional) Display feeling image
 
 # Screenshots
 #### Overview
@@ -46,6 +47,15 @@ rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=produc
   #for redmine 3x,  class CreateTable < ActiveRecord::Migration
   #for redmine 4x,  class CreateTable < ActiveRecord::Migration[4.2]
 </pre>
+
+
+### How to add feeling images
+
+You can add face images into assets\images\* directory.
+Image shall be 5 data each and named with 5.png, ... 1.png.
+And restart server.
+
+Enjoy new function!
 
 ## UnInstall
 
