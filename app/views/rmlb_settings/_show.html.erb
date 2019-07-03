@@ -11,6 +11,15 @@
   <% folders.unshift("") %>
   <p><%= content_tag(:label, l(:label_rmlb_feeling)) %><%= select_tag('settings[rmlb_image_folder]',options_for_select(folders,@settings['rmlb_image_folder'])) %></p>
   
+<p>
+  <%= content_tag(:label, "Timezone") %>
+  <%= select_tag("settings[rmlb_default_timezone]",
+        time_zone_options_for_select(@settings['rmlb_default_timezone'])) %><br>
+    This field is for redmine 3.3.x or lower version. <br>
+    In the higher version, this field is ignored. Use redmine default timezone setting.
+</p>
+
+  
   <br>
   <h2>Location Group 1</h2>
     <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_1]', @settings['rmlb_group_name_1'], :size => 20, :maxlength => 25 %></p>

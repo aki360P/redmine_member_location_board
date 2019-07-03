@@ -19,6 +19,10 @@ class RmlbLocationsController < ApplicationController
       unless @user_current_timezone.present?
         @user_current_timezone = Setting.default_users_time_zone
       end
+    else
+      unless @user_current_timezone.present?
+        @user_current_timezone = Setting.plugin_redmine_member_location_board['rmlb_default_timezone']
+      end
     end
 
     RmlbLocation.create_all(@project.users.ids)
