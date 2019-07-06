@@ -85,7 +85,8 @@ class RmlbLocationsController < ApplicationController
   
   def rmlb_image_path(feeling)
     unless feeling.nil?
-      path = '/plugin_assets/redmine_member_location_board/images/' + Setting.plugin_redmine_member_location_board['rmlb_image_folder'] + '/' + feeling.to_s + '.png'
+      #path = '/plugin_assets/redmine_member_location_board/images/' + Setting.plugin_redmine_member_location_board['rmlb_image_folder'] + '/' + feeling.to_s + '.png'
+      path = '/plugin_assets/redmine_member_location_board/images/' + @rmlb_setting.rmlb_image_folder + '/' + feeling.to_s + '.png'
     else
       nil
     end
@@ -114,7 +115,7 @@ class RmlbLocationsController < ApplicationController
     else
       @rmlb_display_id = Setting.plugin_redmine_member_location_board['rmlb_display_id']
       @rmlb_priority_sort = Setting.plugin_redmine_member_location_board['rmlb_priority_sort']
-      @rmlb_display_feeling = Setting.plugin_redmine_member_location_board['rmlb_display_feeling']
+      #@rmlb_display_feeling = Setting.plugin_redmine_member_location_board['rmlb_display_feeling']
       
       @rmlb_group_name_1 = Setting.plugin_redmine_member_location_board['rmlb_group_name_1']
       @rmlb_group_color_1 = Setting.plugin_redmine_member_location_board['rmlb_group_color_1']
@@ -137,6 +138,16 @@ class RmlbLocationsController < ApplicationController
       @rmlb_group_name_7 = Setting.plugin_redmine_member_location_board['rmlb_group_name_7']
       @rmlb_group_color_7 = Setting.plugin_redmine_member_location_board['rmlb_group_color_7']
       @rmlb_group_list_7 = Setting.plugin_redmine_member_location_board['rmlb_group_list_7'].split(/\r\n/)
+
+      @rmlb_setting = RmlbSetting.find_or_create(@project.id)
+      @rmlb_local_gruop_lsit_1 = @rmlb_setting.rmlb_local_group_list_1.split(/\r\n/)
+      @rmlb_local_gruop_lsit_2 = @rmlb_setting.rmlb_local_group_list_2.split(/\r\n/)
+      @rmlb_local_gruop_lsit_3 = @rmlb_setting.rmlb_local_group_list_3.split(/\r\n/)
+      @rmlb_local_gruop_lsit_4 = @rmlb_setting.rmlb_local_group_list_4.split(/\r\n/)
+      @rmlb_local_gruop_lsit_5 = @rmlb_setting.rmlb_local_group_list_5.split(/\r\n/)
+      @rmlb_local_gruop_lsit_6 = @rmlb_setting.rmlb_local_group_list_6.split(/\r\n/)
+      @rmlb_local_gruop_lsit_7 = @rmlb_setting.rmlb_local_group_list_7.split(/\r\n/)
+
     end
   end
 

@@ -1,15 +1,17 @@
 require 'redmine'
+require 'rmlb_projects_helper_patch'
 
 Redmine::Plugin.register :redmine_member_location_board do
   name 'Redmine Member Location Board plugin'
   author 'Akinori Iwasaki'
   description 'Provides a member location board'
-  version '1.1.1'
+  version '1.2.0'
   url 'https://github.com/aki360P/redmine_member_location_board'
   
   project_module :redmine_member_location_board do
     permission :rmlb_location_view, :rmlb_locations => [:index, :show]
     permission :rmlb_location_edit, :rmlb_locations => [:update]
+    permission :rmlb_setting_edit, :rmlb_settings => [:edit]
   end
   
   
@@ -18,7 +20,7 @@ Redmine::Plugin.register :redmine_member_location_board do
   
   
   # setting
-  settings  partial: 'rmlb_settings/show',
+  settings  partial: 'rmlb_global_settings/show',
             default: {
               'rmlb_display_id' => 'false',
               'rmlb_priority_sort' => 'false',

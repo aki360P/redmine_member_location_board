@@ -1,67 +1,80 @@
 
 <%= stylesheet_link_tag 'rmlb_setting.css',:plugin => 'redmine_member_location_board' %>
 
-<div class='settings_for_plugin'>
-  <h2>Global Setting</h2>
-  <p><%= content_tag(:label, l(:label_rmlb_display_id)) %><%= check_box_tag 'settings[rmlb_display_id]', true, @settings['rmlb_display_id'] == "true" %></p>
-  <p><%= content_tag(:label, l(:label_rmlb_priority_sort)) %><%= check_box_tag 'settings[rmlb_priority_sort]', true, @settings['rmlb_priority_sort'] == "true" %></p>
-  <p><%= content_tag(:label, l(:label_rmlb_display_feeling)) %><%= check_box_tag 'settings[rmlb_display_feeling]', true, @settings['rmlb_display_feeling'] == "true" %></p>
+<div class='rmlb_settings'>
+
+<%= labelled_form_for :settings, @rmlb_setting,
+                             :url => {:controller => 'rmlb_settings',
+                             :action => 'edit', :project_id => @project, :tab => 'rmlb_settings',
+                             :setting_id => @rmlb_setting.id}, 
+                             :html => {:id => 'rmlb_settings' } do |f| %>
+
+
+  <div class="box tabular">
+
+  <p><%= content_tag(:label, l(:label_rmlb_display_feeling)) %><%= check_box_tag 'settings[rmlb_display_feeling]', true, @rmlb_setting['rmlb_display_feeling'] %></p>
   <% folders = Dir.glob('public/plugin_assets/redmine_member_location_board/images/*') %>
   <% folders.each {|f| f.gsub!('public/plugin_assets/redmine_member_location_board/images/','')} %>
   <% folders.unshift("") %>
-  <p><%= content_tag(:label, l(:label_rmlb_feeling)) %><%= select_tag('settings[rmlb_image_folder]',options_for_select(folders,@settings['rmlb_image_folder'])) %></p>
-  
-<p>
-  <%= content_tag(:label, "Timezone") %>
-  <%= select_tag("settings[rmlb_default_timezone]",
-        time_zone_options_for_select(@settings['rmlb_default_timezone'])) %><br>
-    This field is for redmine 3.3.x or lower version. <br>
-    In the higher version, this field is ignored. Use redmine default timezone setting.
-</p>
-
+  <p><%= content_tag(:label, l(:label_rmlb_feeling)) %><%= select_tag('settings[rmlb_image_folder]',options_for_select(folders,@rmlb_setting['rmlb_image_folder'])) %></p>
   
   <br>
-  <h2>Location Group 1</h2>
-    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_1]', @settings['rmlb_group_name_1'], :size => 20, :maxlength => 25 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_group_color_1]', @settings['rmlb_group_color_1'], :size => 7, :maxlength => 7 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_group_list_1]', @settings['rmlb_group_list_1'], :rows => 10 %></p>
+  <p><%= content_tag(:label, l(:label_rmlb_enable_global_group)) %>
+      Group 1 <%= check_box_tag 'settings[rmlb_enable_global_group_1]', true, @rmlb_setting['rmlb_enable_global_group_1'] %><br>
+      Group 2 <%= check_box_tag 'settings[rmlb_enable_global_group_2]', true, @rmlb_setting['rmlb_enable_global_group_2'] %><br>
+      Group 3 <%= check_box_tag 'settings[rmlb_enable_global_group_3]', true, @rmlb_setting['rmlb_enable_global_group_3'] %><br>
+      Group 4 <%= check_box_tag 'settings[rmlb_enable_global_group_4]', true, @rmlb_setting['rmlb_enable_global_group_4'] %><br>
+      Group 5 <%= check_box_tag 'settings[rmlb_enable_global_group_5]', true, @rmlb_setting['rmlb_enable_global_group_5'] %><br>
+      Group 6 <%= check_box_tag 'settings[rmlb_enable_global_group_6]', true, @rmlb_setting['rmlb_enable_global_group_6'] %><br>
+      Group 7 <%= check_box_tag 'settings[rmlb_enable_global_group_7]', true, @rmlb_setting['rmlb_enable_global_group_1'] %></p>
+  
+  <br>
+
+  <h2>Project Location Group 1</h2>
+    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_local_group_name_1]', @rmlb_setting['rmlb_local_group_name_1'], :size => 20, :maxlength => 25 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_local_group_color_1]', @rmlb_setting['rmlb_local_group_color_1'], :size => 7, :maxlength => 7 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_local_group_list_1]', @rmlb_setting['rmlb_local_group_list_1'], :rows => 10 %></p>
   
   <br/>
-  <h2>Location Group 2</h2>
-    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_2]', @settings['rmlb_group_name_2'], :size => 20, :maxlength => 25 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_group_color_2]', @settings['rmlb_group_color_2'], :size => 7, :maxlength => 7 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_group_list_2]', @settings['rmlb_group_list_2'], :rows => 10 %></p>
+  <h2>Project Location Group 2</h2>
+    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_local_group_name_2]', @rmlb_setting['rmlb_local_group_name_2'], :size => 20, :maxlength => 25 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_local_group_color_2]', @rmlb_setting['rmlb_local_group_color_2'], :size => 7, :maxlength => 7 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_local_group_list_2]', @rmlb_setting['rmlb_local_group_list_2'], :rows => 10 %></p>
     
   <br/>
-  <h2>Location Group 3</h2>
-    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_3]', @settings['rmlb_group_name_3'], :size => 20, :maxlength => 25 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_group_color_3]', @settings['rmlb_group_color_3'], :size => 7, :maxlength => 7 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_group_list_3]', @settings['rmlb_group_list_3'], :rows => 10 %></p>
+  <h2>Project Location Group 3</h2>
+    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_local_group_name_3]', @rmlb_setting['rmlb_local_group_name_3'], :size => 20, :maxlength => 25 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_local_group_color_3]', @rmlb_setting['rmlb_local_group_color_3'], :size => 7, :maxlength => 7 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_local_group_list_3]', @rmlb_setting['rmlb_local_group_list_3'], :rows => 10 %></p>
   
   <br/>
-  <h2>Location Group 4</h2>
-    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_4]', @settings['rmlb_group_name_4'], :size => 20, :maxlength => 25 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_group_color_4]', @settings['rmlb_group_color_4'], :size => 7, :maxlength => 7 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_group_list_4]', @settings['rmlb_group_list_4'], :rows => 10 %></p>
+  <h2>Project Location Group 4</h2>
+    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_local_group_name_4]', @rmlb_setting['rmlb_local_group_name_4'], :size => 20, :maxlength => 25 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_local_group_color_4]', @rmlb_setting['rmlb_local_group_color_4'], :size => 7, :maxlength => 7 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_local_group_list_4]', @rmlb_setting['rmlb_local_group_list_4'], :rows => 10 %></p>
   
   <br/>
-  <h2>Location Group 5</h2>
-    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_5]', @settings['rmlb_group_name_5'], :size => 20, :maxlength => 25 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_group_color_5]', @settings['rmlb_group_color_5'], :size => 7, :maxlength => 7 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_group_list_5]', @settings['rmlb_group_list_5'], :rows => 10 %></p>
+  <h2>Project Location Group 5</h2>
+    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_local_group_name_5]', @rmlb_setting['rmlb_local_group_name_5'], :size => 20, :maxlength => 25 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_local_group_color_5]', @rmlb_setting['rmlb_local_group_color_5'], :size => 7, :maxlength => 7 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_local_group_list_5]', @rmlb_setting['rmlb_local_group_list_5'], :rows => 10 %></p>
   
   <br/>
-  <h2>Location Group 6</h2>
-    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_6]', @settings['rmlb_group_name_6'], :size => 20, :maxlength => 25 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_group_color_6]', @settings['rmlb_group_color_6'], :size => 7, :maxlength => 7 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_group_list_6]', @settings['rmlb_group_list_6'], :rows => 10 %></p>
+  <h2>Project Location Group 6</h2>
+    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_local_group_name_6]', @rmlb_setting['rmlb_local_group_name_6'], :size => 20, :maxlength => 25 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_local_group_color_6]', @rmlb_setting['rmlb_local_group_color_6'], :size => 7, :maxlength => 7 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_local_group_list_6]', @rmlb_setting['rmlb_local_group_list_6'], :rows => 10 %></p>
   
   <br/>
-  <h2>Location Group 7</h2>
-    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_group_name_7]', @settings['rmlb_group_name_7'], :size => 20, :maxlength => 25 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_group_color_7]', @settings['rmlb_group_color_7'], :size => 7, :maxlength => 7 %></p>
-    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_group_list_7]', @settings['rmlb_group_list_7'], :rows => 10 %></p>
-  
-  <br/>
+  <h2>Project Location Group 7</h2>
+    <p><%= content_tag(:label, l(:label_rmlb_group_name)) %><%= text_field_tag 'settings[rmlb_local_group_name_7]', @rmlb_setting['rmlb_local_group_name_7'], :size => 20, :maxlength => 25 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_color)) %><%= text_field_tag 'settings[rmlb_local_group_color_7]', @rmlb_setting['rmlb_local_group_color_7'], :size => 7, :maxlength => 7 %></p>
+    <p><%= content_tag(:label, l(:label_rmlb_group_list)) %><%= text_area_tag 'settings[rmlb_local_group_list_7]', @rmlb_setting['rmlb_local_group_list_7'], :rows => 10 %></p>
+
+
+  <%= submit_tag l(:button_save) %>
+
+  </div>
+  <% end %>
 </div>
 

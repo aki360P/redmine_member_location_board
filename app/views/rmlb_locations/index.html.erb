@@ -20,8 +20,8 @@
   <input type="checkbox" id="rmlb_check1" name="auto_reload"><label for="rmlb_check1">auto reload</label><br>
   <br>
 
+    <% ii = 0 %>
     <% unless @rmlb_groups.nil? %>
-      <% ii = 0 %>
       <% @rmlb_groups.each do |i| %>
         <br>
         <h3><%= i.name %></h3>
@@ -31,9 +31,14 @@
       <% end %>
     <% end %>
     <br>
-    <h3>Not Grouped Members</h3>
-    <%= render :partial => 'table', :locals => { rmlb_group_member_arry: @rmlb_group_member_arry[ii] }  %>
-    <br>
+
+    <% if @rmlb_group_member_arry[ii].present? || @rmlb_groups.empty? %>
+      <h3>Not Grouped Members</h3>
+      <%= render :partial => 'table', :locals => { rmlb_group_member_arry: @rmlb_group_member_arry[ii] }  %>
+      <br>
+    <% end %>
+
+    <%=   %>
 </div>
 
 
