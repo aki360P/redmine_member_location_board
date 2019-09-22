@@ -10,7 +10,7 @@
 <!-- assets -->
 <%= stylesheet_link_tag 'rmlb_projectindex.css',:plugin => 'redmine_member_location_board' %>
 <%= stylesheet_link_tag 'rmlb_toggle.css',:plugin => 'redmine_member_location_board' %>
-<%= javascript_include_tag 'rmlb_projectindex.js',:plugin => 'redmine_member_location_board' %>
+
 
 <div id='rmlb_main'>
 
@@ -43,7 +43,7 @@
 <div id="rmlb_savemodal" role="dialog"></div>
 
 
-<button type="button" name="test1">テストボタン1</button> <br>
+<!-- <button type="button" name="test1">テストボタン1</button> <br> -->
 
 
 <script type="text/javascript">
@@ -54,50 +54,6 @@
     var rmlb_group_member_arry = <%= @rmlb_group_member_arry %>;
     
     
-	$('button[name="test1"]').click(function() {
-		var checklist = $("input[name='rmlb_edit_location']:checked").map(function(){
-			return $(this).val();
-		  }).get();
-		console.log("chckbox_checked: " + checklist);
-
-		if (checklist.length == 1) {
-      var user_id = checklist[0];
-      var url = baseUrl + '/projects/' + project_id + '/rmlb_locations/' + user_id +'.json?key=' + api_key;
-
-        $.ajax({
-          url : url,
-          dataType : 'json',
-
-          success: function(res){ 
-            console.log("ajax %s ajax成功", url);
-            console.dir(res);
-            
-            edit_modal();
-            },
-          error: function(){ console.log("ajax %s ajax失敗", url);  }
-          
-        });
-      
-		} else {
-      
-    }
-
-  })
-  function edit_modal() {
-    $("#rmlb_savemodal").html("<%= j(render partial: 'savemodal', remote: true) %>")
-
-    $('#rmlb_savemodal').dialog({
-      title : "Edit",
-      modal : true,
-      resizable : false,
-      draggable : true,
-      width : 450,
-      show : 'blind',
-      hide : 'explode'
-    });
-
-    $("#rmlb_savemodal").dialog;
-  }
 
   
   //call function with each group
@@ -146,7 +102,7 @@
                   <td>" + res[i].memo + "</td>\
                   <% if @rmlb_setting.rmlb_display_feeling %><td align='center'><img src='/plugin_assets/redmine_member_location_board/images/" + rmlb_image_folder + "/" + res[i].feeling + ".png'</td><% end %>\
                   <td>" + d2_moment.fromNow() + "</td>\
-                  <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
+                  <td align='center'><a data-remote='true' href='/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>edit</a></td>\
               </tr>\
             ";
             } else {
@@ -161,7 +117,7 @@
                   <td>" + res[i].memo + "</td>\
                   <% if @rmlb_setting.rmlb_display_feeling %><td align='center'></td><% end %>\
                   <td>" + d2_moment.fromNow() + "</td>\
-                  <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
+                  <td align='center'><a data-remote='true' href='/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>edit</a></td>\
               </tr>\
               ";
             }
