@@ -17,9 +17,19 @@ class RmlbLocation < ActiveRecord::Base
       
       # Set default
       rmlb_location.attributes = { user_priority: '50' }
+      rmlb_location.attributes = { login: User.find_by_id(user_id).login }
+      rmlb_location.attributes = { name: User.find_by_id(user_id).name }
       
       rmlb_location.save!
     end
+
+    unless rmlb_location.login.present?
+      rmlb_location.attributes = { login: User.find_by_id(user_id).login }
+      rmlb_location.attributes = { name: User.find_by_id(user_id).name }
+      
+      rmlb_location.save!
+    end
+
     rmlb_location
   end
   

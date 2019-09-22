@@ -9,3 +9,5 @@ div#rmlb_board tr:hover{
 div#rmlb_board tr.old{
   color: #808080;
 }
+
+div#rmlb_saveModal { display: none; }

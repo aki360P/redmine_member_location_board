@@ -1,33 +1,18 @@
 class RmlbLocationsController < ApplicationController
   unloadable
-  before_action :find_user, :find_project, :authorize, :load_config
+  before_action :find_user, :find_project
+  before_action :load_config
+  #before_action :authorize
 
   def initialize
     super()    #body表示を引き継ぐ
   end
 
   def index
+      @rmlb_locations = RmlbLocation.find(@project.users.ids)
+      @rmlb_location_edit = RmlbLocation.find(User.current.id)
 
-    @user_is_manager = 0
-    if User.current.allowed_to?(:edit_project, @project) or User.current.admin?
-      @user_is_manager = 1
-    end
-    
-    @user_current = User.current
-    @user_current_timezone = User.current.time_zone
-    if (Redmine::VERSION::MAJOR == 3 && Redmine::VERSION::MINOR >= 4)
-      unless @user_current_timezone.present?
-        @user_current_timezone = Setting.default_users_time_zone
-      end
-    else
-      unless @user_current_timezone.present?
-        @user_current_timezone = Setting.plugin_redmine_member_location_board['rmlb_default_timezone']
-      end
-    end
 
-    RmlbLocation.create_all(@project.users.ids)
-    @rmlb_locations = RmlbLocation.find(@project.users.ids)
-    
     @rmlb_groups = Principal.member_of(@project).where(['type = ?','Group'])
     @rmlb_group_member_arry = []
     unless @rmlb_groups.nil?
@@ -48,25 +33,24 @@ class RmlbLocationsController < ApplicationController
       @rmlb_locations.sort_by!{|u| u.user_priority }
     end
     
-    if params[:id].nil?
-      @rmlb_location_edit = RmlbLocation.find_or_create(User.current.id)
-      
-      respond_to do |format|
-        format.html
-        format.xml  { render :xml => @rmlb_locations }
-        format.json { render :json => @rmlb_locations }
-      end
-    else
-      @rmlb_location_edit = RmlbLocation.find(params[:id])
-    end
+
     
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @rmlb_locations }
+      format.json { render :json => @rmlb_locations }
+    end
   end
   
   def show
-    index()
-    render "index"
+    @rmlb_location_edit = RmlbLocation.find_or_create(params[:id])
   end
 
+  def edit
+    @rmlb_location_edit = RmlbLocation.find_or_create(params[:id])
+    render :partial => 'edit'
+    #render :partial => 'edit', :locals => { :rmlb_location_edit => @rmlb_location_edit }
+  end
   
   def update
     return if params[:rmlb_location].nil?
@@ -81,17 +65,17 @@ class RmlbLocationsController < ApplicationController
       redirect_to project_rmlb_locations_path(:project => @project.name)
 
   end
-  
-  
-  def rmlb_image_path(feeling)
-    unless feeling.nil?
-      #path = '/plugin_assets/redmine_member_location_board/images/' + Setting.plugin_redmine_member_location_board['rmlb_image_folder'] + '/' + feeling.to_s + '.png'
-      path = '/plugin_assets/redmine_member_location_board/images/' + @rmlb_setting.rmlb_image_folder + '/' + feeling.to_s + '.png'
-    else
-      nil
-    end
+
+  def multiupdate
+    return if params[:rmlb_location].nil?
+
+      aaa = RmlbLocation.where("user_id = ?", [1, 5])
+      aaa.attribute(rmlb_location_param)
+      aaa.save
+      
   end
-  helper_method :rmlb_image_path
+  
+  
 
   private
 
@@ -108,8 +92,14 @@ class RmlbLocationsController < ApplicationController
   def rmlb_location_params
     params.require(:rmlb_location).permit('user_priority', 'location', 'color', 'start_time', 'end_time', 'memo', 'feeling')
   end
+
+  def rmlb_location_param
+    params.require(:rmlb_location).permit('location')
+  end
   
   def load_config
+    RmlbLocation.create_all(@project.users.ids)
+
     if Setting.plugin_redmine_member_location_board.nil?
       redirect_to plugin_settings_path(:id => :redmine_member_location_board)
     else
@@ -147,6 +137,23 @@ class RmlbLocationsController < ApplicationController
       @rmlb_local_gruop_lsit_5 = @rmlb_setting.rmlb_local_group_list_5.split(/\r\n/)
       @rmlb_local_gruop_lsit_6 = @rmlb_setting.rmlb_local_group_list_6.split(/\r\n/)
       @rmlb_local_gruop_lsit_7 = @rmlb_setting.rmlb_local_group_list_7.split(/\r\n/)
+
+      @user_is_manager = 0
+      if User.current.allowed_to?(:edit_project, @project) or User.current.admin?
+        @user_is_manager = 1
+      end
+      
+      @user_current = User.current
+      @user_current_timezone = User.current.time_zone
+      if (Redmine::VERSION::MAJOR == 3 && Redmine::VERSION::MINOR >= 4)
+        unless @user_current_timezone.present?
+          @user_current_timezone = Setting.default_users_time_zone
+        end
+      else
+        unless @user_current_timezone.present?
+          @user_current_timezone = Setting.plugin_redmine_member_location_board['rmlb_default_timezone']
+        end
+      end
 
     end
   end

@@ -1,51 +1,205 @@
 <br/>
 
 
-<script type="text/javascript">
-    var api_key = "<%= User.current.api_key %>";
-    var baseUrl = "<%= config.relative_url_root %>";
-    var project_id = "<%= @project.id %>"
-</script>
 
 
 <!-- library -->
+<%= javascript_include_tag 'moment/moment-with-locales.min.js',:plugin => 'redmine_member_location_board' %>
+
 
 <!-- assets -->
 <%= stylesheet_link_tag 'rmlb_projectindex.css',:plugin => 'redmine_member_location_board' %>
 <%= stylesheet_link_tag 'rmlb_toggle.css',:plugin => 'redmine_member_location_board' %>
 <%= javascript_include_tag 'rmlb_projectindex.js',:plugin => 'redmine_member_location_board' %>
 
+<div id='rmlb_main'>
 
-<div id="rmlb_board">
-  <input type="checkbox" id="rmlb_check1" name="auto_reload"><label for="rmlb_check1">auto reload</label><br>
-  <br>
-
-    <% ii = 0 %>
-    <% unless @rmlb_groups.nil? %>
-      <% @rmlb_groups.each do |i| %>
+  <% ii = 0 %>
+  <% unless @rmlb_groups.nil? %>
+    <% @rmlb_groups.each do |i| %>
         <br>
         <h3><%= i.name %></h3>
-        <%= render :partial => 'table', :locals => { rmlb_group_member_arry: @rmlb_group_member_arry[ii] }  %>
+        
+        <div id='rmlb_board_<%= ii %>'>
+          loading...
+        </div>
+
         <% ii = ii + 1 %>
         <br>
-      <% end %>
     <% end %>
-    <br>
+  <% end %>
 
-    <% if @rmlb_group_member_arry[ii].present? || @rmlb_groups.empty? %>
+  <% if @rmlb_group_member_arry[ii].present? || @rmlb_groups.empty? %>
+      <br>
       <h3>Not Grouped Members</h3>
-      <%= render :partial => 'table', :locals => { rmlb_group_member_arry: @rmlb_group_member_arry[ii] }  %>
+      <div id='rmlb_board_<%= ii %>'>
+          loading...
+      </div>
       <br>
     <% end %>
-
-    <%=   %>
 </div>
 
 
-<div id="footer_message">
+<div id="rmlb_savemodal" role="dialog"></div>
 
-</div>
 
-<% content_for :sidebar do %>
-  <%= render :partial => 'sidebar' %>
-<% end %>
+<button type="button" name="test1">テストボタン1</button> <br>
+
+
+<script type="text/javascript">
+    var api_key = "<%= User.current.api_key %>";
+    var baseUrl = "<%= config.relative_url_root %>";
+    var project_id = "<%= @project.id %>";
+    var rmlb_image_folder = "<%= @rmlb_setting.rmlb_image_folder %>";
+    var rmlb_group_member_arry = <%= @rmlb_group_member_arry %>;
+    
+    
+	$('button[name="test1"]').click(function() {
+		var checklist = $("input[name='rmlb_edit_location']:checked").map(function(){
+			return $(this).val();
+		  }).get();
+		console.log("chckbox_checked: " + checklist);
+
+		if (checklist.length == 1) {
+      var user_id = checklist[0];
+      var url = baseUrl + '/projects/' + project_id + '/rmlb_locations/' + user_id +'.json?key=' + api_key;
+
+        $.ajax({
+          url : url,
+          dataType : 'json',
+
+          success: function(res){ 
+            console.log("ajax %s ajax成功", url);
+            console.dir(res);
+            
+            edit_modal();
+            },
+          error: function(){ console.log("ajax %s ajax失敗", url);  }
+          
+        });
+      
+		} else {
+      
+    }
+
+  })
+  function edit_modal() {
+    $("#rmlb_savemodal").html("<%= j(render partial: 'savemodal', remote: true) %>")
+
+    $('#rmlb_savemodal').dialog({
+      title : "Edit",
+      modal : true,
+      resizable : false,
+      draggable : true,
+      width : 450,
+      show : 'blind',
+      hide : 'explode'
+    });
+
+    $("#rmlb_savemodal").dialog;
+  }
+
+  
+  //call function with each group
+  function buildTableAll(res) {
+    for (var g = 0; g < rmlb_group_member_arry.length; g++) {
+        buildTable(res, g, rmlb_group_member_arry[g]);
+    }
+  }
+
+  //build html table with json response
+  function buildTable(res, g, member_arry) {
+    var str;   //html table
+        str = "<table class='rmlb_board' border=1px>";
+        str = str + "\
+            <tr>\
+              <% if @rmlb_display_id == 'true' %><th><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>\
+              <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><th><%= content_tag(:label, l(:label_rmlb_priority))%></th><% end %><% end %>\
+              <th width='120'><%= content_tag(:label, l(:label_rmlb_name))%></th>\
+              <th width='120'><%= content_tag(:label, l(:label_rmlb_location))%></th>\
+              <th width='50'><%= content_tag(:label, l(:label_rmlb_start))%></th>\
+              <th width='50'><%= content_tag(:label, l(:label_rmlb_end))%></th>\
+              <th width='250'><%= content_tag(:label, l(:label_rmlb_memo))%></th>\
+              <% if @rmlb_setting.rmlb_display_feeling %><th width='50'><%= content_tag(:label, l(:label_rmlb_feeling))%></th><% end %>\
+              <th width='120'><%= content_tag(:label, l(:label_rmlb_update))%></th>\
+              <th width='50'><%= content_tag(:label, l(:label_rmlb_edit))%></th>\
+            </tr>\
+          ";
+
+    if (res.length > 0) {
+      for (var i = 0; i < res.length; i++) {
+        if (member_arry.indexOf(res[i].user_id) >= 0 ) {
+          var d1 = new Date();
+          var d2 = new Date(res[i].updated_on);
+          var d2_moment = moment(d2)
+          var diffTime;
+              diffTime = (d1.getTime() - d2)*0.001;
+          if (diffTime < 3600*24) { 
+            str = str + "\
+              <tr class= '' style='background-color: " + res[i].color + "' height='30'>\
+                  <% if @rmlb_display_id == 'true' %><td>" + res[i].login + "</td><% end %>\
+                  <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><td>" + res[i].user_priority + "</td><% end %><% end %>\
+                  <td><b><a data-remote='true' href='/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>"+ res[i].name +"</a></b></td>\
+                  <td>" + res[i].location + "</td>\
+                  <td align='center' >" + res[i].start_time + "</td>\
+                  <td align='center' >" + res[i].end_time + "</td>\
+                  <td>" + res[i].memo + "</td>\
+                  <% if @rmlb_setting.rmlb_display_feeling %><td align='center'><img src='/plugin_assets/redmine_member_location_board/images/" + rmlb_image_folder + "/" + res[i].feeling + ".png'</td><% end %>\
+                  <td>" + d2_moment.fromNow() + "</td>\
+                  <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
+              </tr>\
+            ";
+            } else {
+            str = str + "\
+              <tr class= 'old' style='background-color: " + res[i].color + "' height='30'>\
+                  <% if @rmlb_display_id == 'true' %><td>" + res[i].login + "</td><% end %>\
+                  <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><td>" + res[i].user_priority + "</td><% end %><% end %>\
+                  <td><b><a data-remote='true' href='/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>"+ res[i].name +"</a></b></td>\
+                  <td>" + res[i].location + "</td>\
+                  <td align='center' >" + res[i].start_time + "</td>\
+                  <td align='center' >" + res[i].end_time + "</td>\
+                  <td>" + res[i].memo + "</td>\
+                  <% if @rmlb_setting.rmlb_display_feeling %><td align='center'></td><% end %>\
+                  <td>" + d2_moment.fromNow() + "</td>\
+                  <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
+              </tr>\
+              ";
+            }
+          } else {}
+        } 
+        str = str + "</table>";
+      } 
+    $('#rmlb_board_' + g ).html(str); 
+    }
+
+  
+
+  function getEventsJSON() {
+		var url = baseUrl + '/projects/' + project_id + '/rmlb_locations.json';
+
+		$.ajax({
+      type: 'get',
+			url : url,
+			dataType : 'json',
+      contentType: 'application/json',
+
+			success: function(res){ 
+				console.log("ajax %s ajax成功", url);
+				console.dir(res);
+        buildTableAll(res);
+         },
+			error: function(){ console.log("ajax %s ajax失敗", url);  }
+			
+		});
+  };
+
+
+  getEventsJSON();
+  setInterval("getEventsJSON()", 60*1000);
+
+
+</script>
+
+
+
+<br>

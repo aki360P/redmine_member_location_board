@@ -1,0 +1,13 @@
+$("#rmlb_savemodal").html("<%= escape_javascript(render partial: 'savemodal') %>")
+
+$('#rmlb_savemodal').dialog({
+	title : "Edit",
+	modal : true,
+	resizable : false,
+	draggable : true,
+	width : 450,
+	show : 'blind',
+	hide : 'explode'
+});
+
+$("#rmlb_savemodal").dialog;
