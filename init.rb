@@ -10,7 +10,7 @@ Redmine::Plugin.register :redmine_member_location_board do
   
   project_module :redmine_member_location_board do
     permission :rmlb_location_view, :rmlb_locations => [:index, :show]
-    permission :rmlb_location_edit, :rmlb_locations => [:update]
+    permission :rmlb_location_edit, :rmlb_locations => [:edit, :update]
     permission :rmlb_setting_edit, :rmlb_settings => [:edit]
   end
   

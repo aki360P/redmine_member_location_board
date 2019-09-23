@@ -1,8 +1,9 @@
 # English strings go here for Rails i18n
 en:
   project_module_redmine_member_location_board: "Member Location Board"
-  permission_rmlb_location_view: "view location board"
+  permission_rmlb_location_view: "view location"
   permission_rmlb_location_edit: "edit location"
+  permission_rmlb_setting_edit: "setting"
   
   label_rmlb: "Location Board"
   label_rmlb_loginid: "Login ID"

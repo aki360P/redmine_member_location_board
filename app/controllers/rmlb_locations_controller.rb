@@ -2,7 +2,9 @@ class RmlbLocationsController < ApplicationController
   unloadable
   before_action :find_user, :find_project
   before_action :load_config
-  #before_action :authorize
+  before_action :authorize
+  accept_api_auth :index, :edit
+
 
   def initialize
     super()    #body表示を引き継ぐ
@@ -10,7 +12,7 @@ class RmlbLocationsController < ApplicationController
 
   def index
       @rmlb_locations = RmlbLocation.find(@project.users.ids)
-      @rmlb_location_edit = RmlbLocation.find(User.current.id)
+      #@rmlb_location_edit = RmlbLocation.find(User.current.id)
 
 
     @rmlb_groups = Principal.member_of(@project).where(['type = ?','Group'])

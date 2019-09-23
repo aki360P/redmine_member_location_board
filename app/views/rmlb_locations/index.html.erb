@@ -42,8 +42,8 @@
 
 <div id="rmlb_savemodal" role="dialog"></div>
 
-
-<!-- <button type="button" name="test1">テストボタン1</button> <br> -->
+<br>
+<button type="button" name="rmlb_edit"><%= content_tag(:label, l(:label_rmlb_edit))%></button> <br>
 
 
 <script type="text/javascript">
@@ -53,7 +53,48 @@
     var rmlb_image_folder = "<%= @rmlb_setting.rmlb_image_folder %>";
     var rmlb_group_member_arry = <%= @rmlb_group_member_arry %>;
     
-    
+  $('button[name="rmlb_edit"]').click(function() {
+		var checklist = $("input[name='rmlb_edit_location']:checked").map(function(){
+			return $(this).val();
+		  }).get();
+		console.log("chckbox_checked: " + checklist);
+
+		if (checklist.length == 1) {
+      var user_id = checklist[0];
+      var url = baseUrl + '/projects/' + project_id + '/rmlb_locations/' + user_id +'/edit';
+
+        $.ajax({
+          type: 'get',
+          url : url,
+          dataType : 'html',
+          headers: {'X-Redmine-API-key': api_key},
+
+          success: function(res){ 
+            console.log("ajax %s ajax成功", url);
+            console.dir(res);
+
+            $("#rmlb_savemodal").html(res)
+
+            $('#rmlb_savemodal').dialog({
+              title : "Edit",
+              modal : true,
+              resizable : false,
+              draggable : true,
+              width : 450,
+              show : 'blind',
+              hide : 'explode'
+            });
+            $("#rmlb_savemodal").dialog;
+            },
+          error: function(){ console.log("ajax %s ajax失敗", url);  }
+          
+        });
+      
+		} else {
+      
+    }
+
+  })
 
   
   //call function with each group
@@ -102,7 +143,7 @@
                   <td>" + res[i].memo + "</td>\
                   <% if @rmlb_setting.rmlb_display_feeling %><td align='center'><img src='/plugin_assets/redmine_member_location_board/images/" + rmlb_image_folder + "/" + res[i].feeling + ".png'</td><% end %>\
                   <td>" + d2_moment.fromNow() + "</td>\
-                  <td align='center'><a data-remote='true' href='/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>edit</a></td>\
+                  <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
               </tr>\
             ";
             } else {
@@ -117,7 +158,7 @@
                   <td>" + res[i].memo + "</td>\
                   <% if @rmlb_setting.rmlb_display_feeling %><td align='center'></td><% end %>\
                   <td>" + d2_moment.fromNow() + "</td>\
-                  <td align='center'><a data-remote='true' href='/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>edit</a></td>\
+                  <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
               </tr>\
               ";
             }
@@ -137,6 +178,7 @@
       type: 'get',
 			url : url,
 			dataType : 'json',
+      headers: {'X-Redmine-API-key': api_key},
       contentType: 'application/json',
 
 			success: function(res){ 

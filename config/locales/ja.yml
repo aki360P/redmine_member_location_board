@@ -3,6 +3,7 @@ ja:
   project_module_redmine_member_location_board: "行先掲示板"
   permission_rmlb_location_view: "行先板の表示"
   permission_rmlb_location_edit: "行き先の編集"
+  permission_rmlb_setting_edit: "設定"
   
   label_rmlb: "行先掲示板"
   label_rmlb_loginid: "ログインID"
