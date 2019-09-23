@@ -1,12 +1,12 @@
-div#rmlb_board th{
+.rmlb_board th{
   background-color: #EEEEEE;
 }
 
-div#rmlb_board tr:hover{
+.rmlb_board tr:hover{
   background-color: #FFFFEE;
 }
 
-div#rmlb_board tr.old{
+.rmlb_board tr.old{
   color: #808080;
 }
 
