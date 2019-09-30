@@ -26,7 +26,6 @@ Redmine::Plugin.register :redmine_member_location_board do
               'rmlb_priority_sort' => 'false',
               'rmlb_display_feeling' => 'false',
               'rmlb_image_folder' => '',
-              'rmlb_default_timezone' => 'Tokyo',
               'rmlb_group_name_1' => 'Location Group 1',
               'rmlb_group_name_2' => '',
               'rmlb_group_name_3' => '',

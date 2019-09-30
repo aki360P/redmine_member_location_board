@@ -144,18 +144,6 @@ class RmlbLocationsController < ApplicationController
       if User.current.allowed_to?(:edit_project, @project) or User.current.admin?
         @user_is_manager = 1
       end
-      
-      @user_current = User.current
-      @user_current_timezone = User.current.time_zone
-      if (Redmine::VERSION::MAJOR == 3 && Redmine::VERSION::MINOR >= 4)
-        unless @user_current_timezone.present?
-          @user_current_timezone = Setting.default_users_time_zone
-        end
-      else
-        unless @user_current_timezone.present?
-          @user_current_timezone = Setting.plugin_redmine_member_location_board['rmlb_default_timezone']
-        end
-      end
 
     end
   end
