@@ -137,12 +137,12 @@
               <tr class= '' style='background-color: " + res[i].color + "' height='30'>\
                   <% if @rmlb_display_id == 'true' %><td>" + res[i].login + "</td><% end %>\
                   <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><td>" + res[i].user_priority + "</td><% end %><% end %>\
-                  <td><b><a data-remote='true' href='/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>"+ res[i].name +"</a></b></td>\
+                  <td><b><a data-remote='true' href='" + baseUrl + "/projects/<%= @project.id %>/rmlb_locations/" + res[i].user_id + "/edit'>"+ res[i].name +"</a></b></td>\
                   <td>" + res[i].location + "</td>\
                   <td align='center' >" + res[i].start_time + "</td>\
                   <td align='center' >" + res[i].end_time + "</td>\
                   <td>" + res[i].memo + "</td>\
-                  <% if @rmlb_setting.rmlb_display_feeling %><td align='center'><img src=" + baseUrl + "'/plugin_assets/redmine_member_location_board/images/" + rmlb_image_folder + "/" + res[i].feeling + ".png'></td><% end %>\
+                  <% if @rmlb_setting.rmlb_display_feeling %><td align='center'><img src='" + baseUrl + "/plugin_assets/redmine_member_location_board/images/" + rmlb_image_folder + "/" + res[i].feeling + ".png'></td><% end %>\
                   <td>" + d2_moment.fromNow() + "</td>\
                   <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
               </tr>\
