@@ -1,6 +1,6 @@
 class CreateSettingTable < ActiveRecord::CompatibleLegacyMigration.migration_class
-  #for redmine 3x,  class CreateTable < ActiveRecord::Migration
-  #for redmine 4x,  class CreateTable < ActiveRecord::Migration[4.2]
+  #for redmine 3x,  class CreateSettingTable < ActiveRecord::Migration
+  #for redmine 4x,  class CreateSettingTable < ActiveRecord::Migration[4.2]
   
   def self.up
     create_table :rmlb_settings do |t|
