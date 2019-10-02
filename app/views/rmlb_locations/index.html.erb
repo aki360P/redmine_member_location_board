@@ -52,7 +52,6 @@
     var project_id = "<%= @project.id %>";
     var rmlb_image_folder = "<%= @rmlb_setting.rmlb_image_folder %>";
     var rmlb_group_member_arry = <%= @rmlb_group_member_arry %>;
-    var redmine_version_major = <%= Redmine::VERSION::MAJOR %>;
     
   $('button[name="rmlb_edit"]').click(function() {
 		var checklist = $("input[name='rmlb_edit_location']:checked").map(function(){
