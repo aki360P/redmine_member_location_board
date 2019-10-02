@@ -35,11 +35,11 @@ rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=produc
 </pre>
 4. restart server
 
-5. enable RestAPI
+5. Enable REST API
 
 ![sample screenshot](./images/check_RestAPI.png "check_permission")
 
-6. permission
+6. set permission
 
 ![sample screenshot](./images/check_permission.png "permission")
 
@@ -47,7 +47,7 @@ rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=produc
 ### How to skip bundle install(change source code)
 
 * delete Gemfile in ./plugins/redmine_member_location_board
-* change source code 001_create_table.rb in ./plugins/redmine_member_location_board/db/migrate.
+* change source code 00x_XxxxXxxxx.rb in ./plugins/redmine_member_location_board/db/migrate.
  First line needs to be changed according to your rails version
 <pre>
  class CreateTable < ActiveRecord::CompatibleLegacyMigration.migration_class
