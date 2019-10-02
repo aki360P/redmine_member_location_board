@@ -7,8 +7,6 @@ This plugin provides the member location board.
 
 ## Main features
 * Display project member location
-* (optional) Show login ID
-* (optional) Sort manually
 * (optional) Display background color
 * (optional) Display feeling image
 
@@ -36,6 +34,10 @@ bundle install
 rake redmine:plugins:migrate NAME=redmine_member_location_board RAILS_ENV=production
 </pre>
 4. restart server
+5. enable RestAPI
+![sample screenshot](./images/check_RestAPI.png "check_permission")
+6. permission
+![sample screenshot](./images/check_permission.png "permission")
 
 ### How to skip bundle install(change source code)
 
@@ -56,6 +58,8 @@ Image shall be 5 data each and named with 5.png, ... 1.png.
 And restart server.
 
 Enjoy new function!
+
+
 
 ## UnInstall
 
