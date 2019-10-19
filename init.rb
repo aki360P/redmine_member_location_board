@@ -5,7 +5,7 @@ Redmine::Plugin.register :redmine_member_location_board do
   name 'Redmine Member Location Board plugin'
   author 'Akinori Iwasaki'
   description 'Provides a member location board'
-  version '1.2.0'
+  version '1.2.1'
   url 'https://github.com/aki360P/redmine_member_location_board'
   
   project_module :redmine_member_location_board do

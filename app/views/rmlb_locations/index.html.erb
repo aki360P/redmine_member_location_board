@@ -141,7 +141,7 @@
                   <td align='center' >" + res[i].start_time + "</td>\
                   <td align='center' >" + res[i].end_time + "</td>\
                   <td>" + res[i].memo + "</td>\
-                  <% if @rmlb_setting.rmlb_display_feeling %><td align='center'><img src='" + baseUrl + "/plugin_assets/redmine_member_location_board/images/" + rmlb_image_folder + "/" + res[i].feeling + ".png'></td><% end %>\
+                  <% if @rmlb_setting.rmlb_display_feeling %><td align='center'>" + image_url(res[i].feeling) + "</td><% end %>\
                   <td>" + d2_moment.fromNow() + "</td>\
                   <td align='center'><input type='checkbox' id='rmlb_edit_location_1'  name='rmlb_edit_location' value=" + res[i].user_id + "></td>\
               </tr>\
@@ -169,7 +169,14 @@
     $('#rmlb_board_' + g ).html(str); 
     }
 
-  
+  function image_url(feeling){
+    if (feeling > 0) {
+      var url = "<img src='" + baseUrl + "/plugin_assets/redmine_member_location_board/images/" + rmlb_image_folder + "/" + feeling + ".png'>"
+    } else {
+      var url = ""
+    }
+    return url;
+  }
 
   function getEventsJSON() {
 		var url = baseUrl + '/projects/' + project_id + '/rmlb_locations.json';
