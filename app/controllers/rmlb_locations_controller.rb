@@ -140,6 +140,7 @@ class RmlbLocationsController < ApplicationController
       @rmlb_local_gruop_lsit_6 = @rmlb_setting.rmlb_local_group_list_6.split(/\r\n/)
       @rmlb_local_gruop_lsit_7 = @rmlb_setting.rmlb_local_group_list_7.split(/\r\n/)
 
+
       @user_current = User.current
       @user_is_manager = 0
       if User.current.allowed_to?(:edit_project, @project) or User.current.admin?
