@@ -11,7 +11,7 @@
 
 
   <div class="box tabular">
-
+  <%= hidden_field_tag 'settings[rmlb_display_feeling]', false %>
   <p><%= content_tag(:label, l(:label_rmlb_display_feeling)) %><%= check_box_tag 'settings[rmlb_display_feeling]', true, @rmlb_setting['rmlb_display_feeling'] %></p>
   <% folders = Dir.glob('public/plugin_assets/redmine_member_location_board/images/*') %>
   <% folders.each {|f| f.gsub!('public/plugin_assets/redmine_member_location_board/images/','')} %>
@@ -20,13 +20,20 @@
   
   <br>
   <p><%= content_tag(:label, l(:label_rmlb_enable_global_group)) %>
+      <%= hidden_field_tag 'settings[rmlb_enable_global_group_1]', false %>
+      <%= hidden_field_tag 'settings[rmlb_enable_global_group_2]', false %>
+      <%= hidden_field_tag 'settings[rmlb_enable_global_group_3]', false %>
+      <%= hidden_field_tag 'settings[rmlb_enable_global_group_4]', false %>
+      <%= hidden_field_tag 'settings[rmlb_enable_global_group_5]', false %>
+      <%= hidden_field_tag 'settings[rmlb_enable_global_group_6]', false %>
+      <%= hidden_field_tag 'settings[rmlb_enable_global_group_7]', false %>
       Group 1 <%= check_box_tag 'settings[rmlb_enable_global_group_1]', true, @rmlb_setting['rmlb_enable_global_group_1'] %><br>
       Group 2 <%= check_box_tag 'settings[rmlb_enable_global_group_2]', true, @rmlb_setting['rmlb_enable_global_group_2'] %><br>
       Group 3 <%= check_box_tag 'settings[rmlb_enable_global_group_3]', true, @rmlb_setting['rmlb_enable_global_group_3'] %><br>
       Group 4 <%= check_box_tag 'settings[rmlb_enable_global_group_4]', true, @rmlb_setting['rmlb_enable_global_group_4'] %><br>
       Group 5 <%= check_box_tag 'settings[rmlb_enable_global_group_5]', true, @rmlb_setting['rmlb_enable_global_group_5'] %><br>
       Group 6 <%= check_box_tag 'settings[rmlb_enable_global_group_6]', true, @rmlb_setting['rmlb_enable_global_group_6'] %><br>
-      Group 7 <%= check_box_tag 'settings[rmlb_enable_global_group_7]', true, @rmlb_setting['rmlb_enable_global_group_1'] %></p>
+      Group 7 <%= check_box_tag 'settings[rmlb_enable_global_group_7]', true, @rmlb_setting['rmlb_enable_global_group_7'] %></p>
   
   <br>
 

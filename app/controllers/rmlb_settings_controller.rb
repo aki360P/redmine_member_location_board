@@ -41,7 +41,7 @@ class RmlbSettingsController < ApplicationController
   
   def rmlb_setting_params
     params.require(:settings).permit('rmlb_display_feeling', 'rmlb_image_folder', 
-      'rmlb_enable_global_group_name_1', 'rmlb_enable_global_group_name_2', 'rmlb_enable_global_group_name_3', 'rmlb_enable_global_group_name_4', 'rmlb_enable_global_group_name_5', 'rmlb_enable_global_group_name_6', 'rmlb_enable_global_group_name_7',
+      'rmlb_enable_global_group_1', 'rmlb_enable_global_group_2', 'rmlb_enable_global_group_3', 'rmlb_enable_global_group_4', 'rmlb_enable_global_group_5', 'rmlb_enable_global_group_6', 'rmlb_enable_global_group_7',
       'rmlb_local_group_name_1','rmlb_local_group_name_2','rmlb_local_group_name_3','rmlb_local_group_name_4','rmlb_local_group_name_5','rmlb_local_group_name_6','rmlb_local_group_name_7',
       'rmlb_local_group_color_1','rmlb_local_group_color_2','rmlb_local_group_color_3','rmlb_local_group_color_4','rmlb_local_group_color_5','rmlb_local_group_color_6','rmlb_local_group_color_7',
       'rmlb_local_group_list_1','rmlb_local_group_list_2','rmlb_local_group_list_3','rmlb_local_group_list_4','rmlb_local_group_list_5','rmlb_local_group_list_6','rmlb_local_group_list_7')
