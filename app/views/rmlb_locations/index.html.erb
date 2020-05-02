@@ -107,11 +107,11 @@
   //build html table with json response
   function buildTable(res, g, member_arry) {
     var str;   //html table
-        str = "<table class='rmlb_board' border=1px>";
+        str = "<table class='rmlb_board' border=1px width='1000px'>";
         str = str + "\
             <tr>\
-              <% if @rmlb_display_id == 'true' %><th><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>\
-              <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><th><%= content_tag(:label, l(:label_rmlb_priority))%></th><% end %><% end %>\
+              <% if @rmlb_display_id == 'true' %><th width='50'><%= content_tag(:label, l(:label_rmlb_loginid))%></th><% end %>\
+              <% if @rmlb_priority_sort == 'true' %><% if @user_is_manager == 1 %><th width='50'><%= content_tag(:label, l(:label_rmlb_priority))%></th><% end %><% end %>\
               <th width='120'><%= content_tag(:label, l(:label_rmlb_name))%></th>\
               <th width='120'><%= content_tag(:label, l(:label_rmlb_location))%></th>\
               <th width='50'><%= content_tag(:label, l(:label_rmlb_start))%></th>\
