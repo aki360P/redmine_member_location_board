@@ -18,7 +18,7 @@
   <% unless @rmlb_groups.nil? %>
     <% @rmlb_groups.each do |i| %>
         <br>
-        <h3><%= i.name %></h3>
+        <h3 id='<%= i.name %>'><%= i.name %></h3>
         
         <div id='rmlb_board_<%= ii %>'>
           loading...
@@ -31,7 +31,7 @@
 
   <% if @rmlb_group_member_arry[ii].present? || @rmlb_groups.empty? %>
       <br>
-      <h3>Not Grouped Members</h3>
+      <h3 id='Not-Grouped'>Not Grouped Members</h3>
       <div id='rmlb_board_<%= ii %>'>
           loading...
       </div>
