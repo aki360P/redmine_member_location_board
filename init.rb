@@ -1,11 +1,11 @@
 require 'redmine'
-require 'rmlb_projects_helper_patch'
+require File.expand_path('../lib/rmlb_projects_helper_patch', __FILE__)
 
 Redmine::Plugin.register :redmine_member_location_board do
   name 'Redmine Member Location Board plugin'
   author 'Akinori Iwasaki'
   description 'Provides a member location board'
-  version '1.2.2'
+  version '1.3.0'
   url 'https://github.com/aki360P/redmine_member_location_board'
   
   project_module :redmine_member_location_board do

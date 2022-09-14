@@ -1,4 +1,4 @@
-class AddColumn < ActiveRecord::CompatibleLegacyMigration.migration_class
+class AddColumn < ActiveRecord::Migration[4.2]
   #for redmine 3x,  class AddColumn < ActiveRecord::Migration
   #for redmine 4x,  class AddColumn < ActiveRecord::Migration[4.2]
 

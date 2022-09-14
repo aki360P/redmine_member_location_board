@@ -1,4 +1,4 @@
-class AddHiddenField < ActiveRecord::CompatibleLegacyMigration.migration_class
+class AddHiddenField < ActiveRecord::Migration[4.2]
   #for redmine 3x,  class AddHiddenField < ActiveRecord::Migration
   #for redmine 4x,  class AddHiddenField < ActiveRecord::Migration[4.2]
 
