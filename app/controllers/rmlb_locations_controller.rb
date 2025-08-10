@@ -1,5 +1,5 @@
 class RmlbLocationsController < ApplicationController
-  unloadable
+  #unloadable
   before_action :find_user, :find_project
   before_action :load_config
   before_action :authorize

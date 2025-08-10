@@ -1,6 +1,6 @@
 class RmlbLocation < ActiveRecord::Base
   include Redmine::SafeAttributes
-  unloadable
+  #unloadable
   belongs_to :user
   self.primary_key = :user_id
   
